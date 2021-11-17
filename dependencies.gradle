@@ -1,0 +1,28 @@
+ext.versions = [
+        minSdk         : 21,
+        compileSdk     : 31,
+        versionCode    : 6,
+        versionName    : '1.0.5',
+
+        // gradle plugins
+        gradleBuildTool: '7.0.2',
+        spotlessGradle : '5.15.0',
+        versionPlugin  : '0.39.0',
+        ktlint         : '0.40.0',
+
+        // kotlin
+        kotlin         : '1.4.32',
+
+        // binding
+        bindablesVersion     : '1.0.9',
+
+        // di
+        hiltCoreVersion      : '2.40',
+        hiltVersion          : '1.0.0',
+
+        // architecture components
+        fragmentVersion      : '1.3.0',
+        lifecycleVersion     : '2.2.0',
+        roomVersion          : '2.4.0-alpha04',
+        archCompomentVersion : '2.1.0',
+]
