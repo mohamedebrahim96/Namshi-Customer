@@ -13,6 +13,9 @@ ext.versions = [
         // kotlin
         kotlin         : '1.4.32',
 
+        // binding
+        bindablesVersion     : '1.0.9',
+
         // di
         hiltCoreVersion      : '2.40',
         hiltVersion          : '1.0.0',
