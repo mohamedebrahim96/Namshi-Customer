@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.namshi.customer">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".NamshiApp"
         android:allowBackup="false"
@@ -14,14 +17,19 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.details.DetailActivity" />
+        <activity
+            android:name=".ui.details.DetailActivity"
+            android:screenOrientation="portrait"
+
+            />
     </application>
 
 </manifest>
