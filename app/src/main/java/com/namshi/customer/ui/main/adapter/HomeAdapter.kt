@@ -7,58 +7,51 @@ package com.namshi.customer.ui.main.adapter
  * ebrahimm131@gmail.com
  */
 
-import android.os.SystemClock
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import com.namshi.customer.R
+import com.namshi.customer.databinding.ItemHomeBinding
+import com.namshi.customer.model.NamshiResponse
 import com.skydoves.bindables.BindingListAdapter
 import com.skydoves.bindables.binding
-import com.skydoves.pokedex.R
-import com.skydoves.pokedex.databinding.ItemPokemonBinding
-import com.skydoves.pokedex.model.Pokemon
-import com.skydoves.pokedex.ui.details.DetailActivity
 
-class HomeAdapter : BindingListAdapter<Pokemon, PokemonAdapter.PokemonViewHolder>(diffUtil) {
+class HomeAdapter : BindingListAdapter<NamshiResponse.Content, HomeAdapter.ViewHolder>(diffUtil) {
 
-    private var onClickedAt = 0L
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder =
-        parent.binding<ItemPokemonBinding>(R.layout.item_pokemon).let(::PokemonViewHolder)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        parent.binding<ItemHomeBinding>(R.layout.item_home).let(::ViewHolder)
 
-    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) =
-        holder.bindPokemon(getItem(position))
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
+        holder.bindContent(getItem(position))
 
-    inner class PokemonViewHolder constructor(
-        private val binding: ItemPokemonBinding
+    inner class ViewHolder constructor(
+        private val binding: ItemHomeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.root.setOnClickListener {
-                val position = bindingAdapterPosition.takeIf { it != NO_POSITION }
-                    ?: return@setOnClickListener
-                val currentClickedAt = SystemClock.elapsedRealtime()
-                if (currentClickedAt - onClickedAt > binding.transformationLayout.duration) {
-                    DetailActivity.startActivity(binding.transformationLayout, getItem(position))
-                    onClickedAt = currentClickedAt
-                }
-            }
+
         }
 
-        fun bindPokemon(pokemon: Pokemon) {
-            binding.pokemon = pokemon
+        fun bindContent(content: NamshiResponse.Content) {
+            binding.content = content
             binding.executePendingBindings()
         }
     }
 
     companion object {
-        private val diffUtil = object : DiffUtil.ItemCallback<Pokemon>() {
+        private val diffUtil = object : DiffUtil.ItemCallback<NamshiResponse.Content>() {
 
-            override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean =
-                oldItem.name == newItem.name
+            override fun areItemsTheSame(
+                oldItem: NamshiResponse.Content,
+                newItem: NamshiResponse.Content
+            ): Boolean =
+                oldItem.type == newItem.type
 
-            override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean =
+            override fun areContentsTheSame(
+                oldItem: NamshiResponse.Content,
+                newItem: NamshiResponse.Content
+            ): Boolean =
                 oldItem == newItem
         }
     }

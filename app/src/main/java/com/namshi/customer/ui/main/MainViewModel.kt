@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.namshi.customer.model.NamshiResponse
 import com.namshi.customer.repository.MainRepository
 import com.skydoves.bindables.BindingViewModel
+import com.skydoves.bindables.asBindingProperty
 import com.skydoves.bindables.bindingProperty
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -34,7 +35,6 @@ class MainViewModel @Inject constructor(
     private val homeFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
     private val homeListFlow = homeFetchingIndex.flatMapLatest { page ->
         mainRepository.fetchHomeList(
-            page = page,
             onStart = { isLoading = true },
             onComplete = { isLoading = false },
             onError = { toastMessage = it }
@@ -42,7 +42,10 @@ class MainViewModel @Inject constructor(
     }
 
     @get:Bindable
-    val homeList: List<NamshiResponse.Content> by homeListFlow.asBindingProperty(viewModelScope, emptyList())
+    val homeList: List<NamshiResponse.Content> by homeListFlow.asBindingProperty(
+        viewModelScope,
+        emptyList()
+    )
 
     init {
         Timber.d("init MainViewModel")
