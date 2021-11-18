@@ -1,8 +1,8 @@
 ext.versions = [
         minSdk         : 21,
         compileSdk     : 31,
-        versionCode    : 6,
-        versionName    : '1.0.5',
+        versionCode    : 1,
+        versionName    : '1.0.0',
 
         // gradle plugins
         gradleBuildTool: '7.0.2',
@@ -12,6 +12,10 @@ ext.versions = [
 
         // kotlin
         kotlin         : '1.4.32',
+
+        // support library
+        materialVersion      : '1.2.0-alpha06',
+        constraintVersion    : '2.0.4',
 
         // binding
         bindablesVersion     : '1.0.9',

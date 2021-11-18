@@ -8,16 +8,25 @@ plugins {
 apply from: "$rootDir/dependencies.gradle"
 
 android {
-    compileSdk 31
-
+    compileSdkVersion versions.compileSdk
     defaultConfig {
         applicationId "com.namshi.customer"
-        minSdk 21
-        targetSdk 31
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation" : "$projectDir/schemas".toString()]
+            }
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
+        }
     }
 
     buildTypes {
@@ -64,6 +73,9 @@ android {
 }
 
 dependencies {
+    // android supports
+    implementation "com.google.android.material:material:$versions.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintVersion"
 
     // architecture components
     implementation "androidx.fragment:fragment-ktx:$versions.fragmentVersion"
