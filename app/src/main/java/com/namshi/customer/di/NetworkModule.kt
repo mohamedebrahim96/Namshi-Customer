@@ -1,11 +1,17 @@
 package com.namshi.customer.di
 
 import com.namshi.customer.network.HttpRequestInterceptor
+import com.namshi.customer.network.NamshiClient
+import com.namshi.customer.network.NamshiService
+import com.namshi.customer.utils.Constants
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 
@@ -25,4 +31,28 @@ object NetworkModule {
             .addInterceptor(HttpRequestInterceptor())
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNamshiService(retrofit: Retrofit): NamshiService {
+        return retrofit.create(NamshiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNamshiClient(namshiService: NamshiService): NamshiClient {
+        return NamshiClient(namshiService)
+    }
+
 }
