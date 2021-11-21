@@ -20,8 +20,12 @@ data class NamshiResponse(
     @JsonClass(generateAdapter = true)
     data class Content(
         @field:Json(name = "type") var type: String,
-        @field:Json(name = "cols") var cols: Int?,
-        @field:Json(name = "images") var images: List<Images>?
+        @field:Json(name = "cols") val cols: Int = -1,
+        @field:Json(name = "images") var images: List<Images>?,
+        @field:Json(name = "show") val show: Int = -1,
+        @field:Json(name = "title") val title: String = "",
+        @field:Json(name = "height") val height: Int = -1,
+        @field:Json(name = "url") val url: String = "",
     ) : Parcelable {
         @Parcelize
         @JsonClass(generateAdapter = true)
