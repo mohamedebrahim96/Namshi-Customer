@@ -51,25 +51,17 @@ class HomeAdapter : BindingListAdapter<NamshiResponse.Content, HomeAdapter.ViewH
                     }
                 }
             }
-            else -> holder.bindItem(getItem(position))
-//                ItemHomeBinding.bind(holder.itemView).apply {
-//                content = getItem(position)
-//            }
+            else ->
+                ItemHomeBinding.bind(holder.itemView).apply { content = getItem(position)
+            }
         }
     }
 
     override fun getItemViewType(position: Int) = getItem(position).type.asInt
 
     inner class ViewHolder constructor(private val binding: View) :
-        RecyclerView.ViewHolder(binding) {
-        val itemHomeBinding = ItemHomeBinding.bind(binding)
+        RecyclerView.ViewHolder(binding)
 
-
-        fun bindItem(content: NamshiResponse.Content) {
-            itemHomeBinding.content = content
-            itemHomeBinding.executePendingBindings()
-        }
-    }
 
     companion object {
         private val diffUtil = object : DiffUtil.ItemCallback<NamshiResponse.Content>() {
