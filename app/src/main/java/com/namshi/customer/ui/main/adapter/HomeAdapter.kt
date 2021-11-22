@@ -7,35 +7,67 @@ package com.namshi.customer.ui.main.adapter
  * ebrahimm131@gmail.com
  */
 
+import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.namshi.customer.R
 import com.namshi.customer.databinding.ItemHomeBinding
+import com.namshi.customer.databinding.ItemImageBinding
 import com.namshi.customer.model.NamshiResponse
 import com.skydoves.bindables.BindingListAdapter
-import com.skydoves.bindables.binding
 
 class HomeAdapter : BindingListAdapter<NamshiResponse.Content, HomeAdapter.ViewHolder>(diffUtil) {
 
+    private val imageViewPool = RecyclerView.RecycledViewPool()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        parent.binding<ItemHomeBinding>(R.layout.item_home).let(::ViewHolder)
+        when (viewType) {
+            NamshiResponse.Content.Type.image.asInt ->
+                ViewHolder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+                )
+            else -> ViewHolder(
+                LayoutInflater.from(parent.context).inflate(R.layout.item_home, parent, false)
+            )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bindContent(getItem(position))
-
-    inner class ViewHolder constructor(
-        private val binding: ItemHomeBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        init {
-
+            //parent.binding<ItemHomeBinding>(R.layout.item_home).let(::ViewHolder)
         }
 
-        fun bindContent(content: NamshiResponse.Content) {
-            binding.content = content
-            binding.executePendingBindings()
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(holder.adapterPosition)
+        when (holder.itemViewType) {
+            NamshiResponse.Content.Type.image.asInt -> {
+                ItemImageBinding.bind(holder.itemView).apply {
+                    content = item
+                    imageRecycler.apply {
+                        setRecycledViewPool(imageViewPool)
+                        if (item.cols > 0) {
+                            layoutManager = GridLayoutManager(context, item.cols)
+                            adapter = ImageWidgetAdapter()
+                        }
+                    }
+                }
+            }
+            else -> holder.bindItem(getItem(position))
+//                ItemHomeBinding.bind(holder.itemView).apply {
+//                content = getItem(position)
+//            }
+        }
+    }
+
+    override fun getItemViewType(position: Int) = getItem(position).type.asInt
+
+    inner class ViewHolder constructor(private val binding: View) :
+        RecyclerView.ViewHolder(binding) {
+        val itemHomeBinding = ItemHomeBinding.bind(binding)
+
+
+        fun bindItem(content: NamshiResponse.Content) {
+            itemHomeBinding.content = content
+            itemHomeBinding.executePendingBindings()
         }
     }
 

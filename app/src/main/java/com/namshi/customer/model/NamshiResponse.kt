@@ -19,7 +19,7 @@ data class NamshiResponse(
     @Parcelize
     @JsonClass(generateAdapter = true)
     data class Content(
-        @field:Json(name = "type") var type: String,
+        @field:Json(name = "type") var type: Type,
         @field:Json(name = "cols") val cols: Int = -1,
         @field:Json(name = "images") var images: List<Images>?,
         @field:Json(name = "show") val show: Int = -1,
@@ -35,5 +35,25 @@ data class NamshiResponse(
             @field:Json(name = "height") var height: Int,
             @field:Json(name = "format") var format: String
         ) : Parcelable
+
+
+        enum class Type : ViewType {
+            image {
+                override val asInt: Int get() = 1
+            },
+            carousel {
+                override val asInt: Int get() = 2
+            },
+            slider {
+                override val asInt: Int get() = 3
+            },
+            unknown {
+                override val asInt: Int get() = -1
+            }
+        }
+
+        interface ViewType {
+            val asInt: Int
+        }
     }
 }
