@@ -1,5 +1,6 @@
 <h1 align="center">Namshi Customer</h1>
 <img alt="Build Status" src="https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg"/>
+[![Namshi Customer App](https://img.shields.io/github/v/release/mohamedebrahim96/Namshi-Customer?color=7885FF&label=Namshi-customer%20App&logo=android&style=for-the-badge)](https://github.com/mohamedebrahim96/Namshi-Customer/releases/download/1.0.0/Namshi-app.apk)
 
 <p align="center">  
 The Namshi shopping app is your no.1 fashion & beauty destination in Saudi Arabia, United Arab Emirates, Kuwait, Oman, Bahrain, Qatar & Iraq.
