@@ -7,3 +7,5 @@ Enjoy online shopping with over 1,300 brands and more than 130,000 products acro
 Appreciate the advantages of on-the-go shopping online & use our easy filters to find exactly what you’ve been searching for, all in one online shopping destination.
 </p>
 </br>
+
+<img src="/wiki/namshigif.gif" align="right" width="32%"/>
