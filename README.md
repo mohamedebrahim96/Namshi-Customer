@@ -43,3 +43,9 @@ Go to the [Releases](https://github.com/mohamedebrahim96/Namshi-Customer/release
 - [WhatIf](https://github.com/skydoves/whatif) - checking nullable object and empty collections more fluently.
 - [Timber](https://github.com/JakeWharton/timber) - logging.
 - [Material-Components](https://github.com/material-components/material-components-android) - Material design components like ripple animation, cardView.
+
+
+## Architecture
+Namshi app is based on MVVM architecture and a repository pattern.
+
+![architecture](https://user-images.githubusercontent.com/24237865/77502018-f7d36000-6e9c-11ea-92b0-1097240c8689.png)
