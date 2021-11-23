@@ -8,4 +8,8 @@ Appreciate the advantages of on-the-go shopping online & use our easy filters to
 </p>
 </br>
 
+<p align="center">
+<img src="/wiki/screenshot.jpg"/>
+</p>
+
 <img src="/wiki/namshigif.gif" align="right" width="32%"/>
