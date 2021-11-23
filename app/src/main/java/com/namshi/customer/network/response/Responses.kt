@@ -2,7 +2,6 @@ package com.namshi.customer.network.response
 
 import com.namshi.customer.model.Image
 import com.namshi.customer.model.NamshiWidget
-import com.namshi.customer.utils.Constant
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,4 +24,4 @@ data class HomeContent(val content: List<NamshiWidget> = listOf())
  * API 2, 3, 4 Response
 * */
 @Serializable
-data class CarouselContent(val images: List<Image> = listOf(), var url: String = Constant.EMPTY_STR)
+data class CarouselContent(val images: List<Image> = listOf(), var url: String = "")

@@ -7,7 +7,5 @@ package com.namshi.customer.utils
  * ebrahimm131@gmail.com
  */
 object Constants {
-
     const val BASE_URL = "https://demo8082631.mockable.io/"
-
 }

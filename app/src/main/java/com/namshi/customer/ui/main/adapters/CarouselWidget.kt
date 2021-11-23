@@ -12,7 +12,6 @@ import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.utils.ActionListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
-import com.namshi.customer.utils.onClick
 
 /**
  * Adapter to display [NamshiWidget.Type]
@@ -25,7 +24,7 @@ class CarouselWidget(private val listener: ActionListener) :
         return Holder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_carousel_sub, parent, false)
         ).apply {
-            itemView.onClick() {
+            itemView.setOnClickListener {
                 val image = items[adapterPosition]
                 listener.onItemClick(image)
             }

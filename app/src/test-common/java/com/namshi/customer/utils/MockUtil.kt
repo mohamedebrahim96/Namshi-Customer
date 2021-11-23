@@ -21,7 +21,7 @@ import com.namshi.customer.model.NamshiResponse
 object MockUtil {
 
     fun mockContent() = NamshiResponse.Content(
-        type = "image",
+        type = NamshiResponse.Content.Type.image,
         cols = 1,
         images = mockContentImageList()
     )

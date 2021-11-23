@@ -14,7 +14,6 @@ import com.namshi.customer.ui.main.adapters.MainWidget
 import com.namshi.customer.ui.details.DetailsFragment
 import com.namshi.customer.network.response.ApiResponse
 import com.namshi.customer.network.response.HomeContent
-import com.namshi.customer.utils.onClick
 import com.namshi.customer.utils.showIf
 
 /**
@@ -57,7 +56,7 @@ class MainFragment : BaseFragment(), ActionListener {
         adapter = MainWidget(this, this)
         binding.mainRecycler.adapter = adapter
         binding.mainRefresh.setOnRefreshListener { viewModel.refreshMainScreen() }
-        binding.errorLayout.onClick() { viewModel.refreshMainScreen() }
+        binding.errorLayout.setOnClickListener{ viewModel.refreshMainScreen() }
         viewModel.homeContentLiveData.observe(viewLifecycleOwner, ::setData)
     }
 

@@ -12,9 +12,8 @@ import com.namshi.customer.utils.ActionListener
 import com.namshi.customer.ui.main.MainViewModel
 import com.namshi.customer.network.response.ApiResponse
 import com.namshi.customer.network.response.CarouselContent
-import com.namshi.customer.ui.details.adapters.ProductGridAdapter
+import com.namshi.customer.ui.details.adapters.DetailsAdapter
 import com.namshi.customer.utils.ShowImage
-import com.namshi.customer.utils.onClick
 import com.namshi.customer.utils.showIf
 
 /**
@@ -41,7 +40,7 @@ class DetailsFragment : BaseFragment(), ActionListener {
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var adapter: ProductGridAdapter
+    private lateinit var adapter: DetailsAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +55,9 @@ class DetailsFragment : BaseFragment(), ActionListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.gridRecycler.adapter = ProductGridAdapter(this@DetailsFragment).also { adapter = it }
+        binding.gridRecycler.adapter = DetailsAdapter(this@DetailsFragment).also { adapter = it }
         binding.gridRefresh.setOnRefreshListener { viewModel.refreshProductScreen() }
-        binding.errorLayout.onClick() { viewModel.refreshProductScreen() }
+        binding.errorLayout.setOnClickListener { viewModel.refreshProductScreen() }
         viewModel.productListLiveData.observe(viewLifecycleOwner, ::setData)
     }
 

@@ -1,6 +1,5 @@
 package com.namshi.customer.di
 
-import com.namshi.customer.network.HttpRequestInterceptor
 import com.namshi.customer.network.NamshiClient
 import com.namshi.customer.network.NamshiService
 import com.namshi.customer.utils.Constants
@@ -10,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -28,9 +28,10 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(HttpRequestInterceptor())
+            .addNetworkInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
+
 
     @Provides
     @Singleton

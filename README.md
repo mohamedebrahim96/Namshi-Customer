@@ -2,7 +2,7 @@
 
 <p align="center">
  <img alt="Medium" src="https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg"/></a>
-     <a href="https://android-arsenal.com/api?level=21"><img alt="API" src="https://img.shields.io/github/stars/mohamedebrahim96?style=social"/></a>
+     <a href="https://github.com/mohamedebrahim96?tab=followers"><img alt="API" src="https://img.shields.io/github/stars/mohamedebrahim96?style=social"/></a>
      <a href="https://github.com/mohamedebrahim96/Namshi-Customer/releases/download/1.0.0/Namshi-app.apk"><img alt="API" src="https://img.shields.io/github/v/release/mohamedebrahim96/Namshi-Customer?color=7885FF&label=Namshi-customer%20App&logo=android"/></a>
 
 </p>

@@ -21,7 +21,7 @@ android {
         testInstrumentationRunner "com.namshi.customer.AppTestRunner"
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments += ["room.schemaLocation" : "$projectDir/schemas".toString()]
+                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
 //        javaCompileOptions {
@@ -54,9 +54,9 @@ android {
         viewBinding = true
     }
 
-//    buildFeatures {
-//        dataBinding true
-//    }
+    buildFeatures {
+        dataBinding true
+    }
 
     lintOptions {
         abortOnError false
@@ -96,15 +96,19 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$versions.archCompomentVersion"
 
 
-    // binding
-//    implementation ("com.github.skydoves:bindables:$versions.bindablesVersion") {
-//        exclude group: "com.google.android.material"
-//    }
+    //binding
+    implementation("com.github.skydoves:bindables:$versions.bindablesVersion") {
+        exclude group: "com.google.android.material"
+    }
 
     // coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutinesVersion"
+
+
+    // startup
+    implementation "androidx.startup:startup-runtime:$versions.startupVersion"
 
 
     // hilt
