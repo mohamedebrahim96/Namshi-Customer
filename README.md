@@ -1,12 +1,8 @@
 <h1 align="center">Namshi Customer</h1>
 
-<p align="center">
-<img alt="Build Status" src="https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg"/>
-<img alt="Namshi Customer App" src="https://img.shields.io/github/v/release/mohamedebrahim96/Namshi-Customer?color=7885FF&label=Namshi-customer%20App&logo=android"/>
-<img alt="mohamedebrahim96" src="https://img.shields.io/github/v/release/mohamedebrahim96/mohamedebrahim96?color=7885FF&label=mohamedebrahim96"/>
-    
-</p>
-
+[![Build Status](https://github.com/mohamedebrahim96/Namshi-Customer/workflows/Android%20CI/badge.svg)](https://github.com/mohamedebrahim96?tab=followers)
+[![GitHub stars](https://img.shields.io/github/stars/mohamedebrahim96?style=social)](https://github.com/mohamedebrahim96?tab=followers)
+[![Namshi Customer App](https://img.shields.io/github/v/release/mohamedebrahim96/Namshi-Customer?color=7885FF&label=Namshi-customer%20App&logo=android)](https://github.com/mohamedebrahim96/Namshi-Customer/releases/download/1.0.0/Namshi-app.apk)
 
 <p align="center">  
 The Namshi shopping app is your no.1 fashion & beauty destination in Saudi Arabia, United Arab Emirates, Kuwait, Oman, Bahrain, Qatar & Iraq.
