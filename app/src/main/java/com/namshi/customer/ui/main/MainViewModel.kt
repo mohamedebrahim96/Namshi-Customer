@@ -1,54 +1,79 @@
 package com.namshi.customer.ui.main
 
-import androidx.databinding.Bindable
-import androidx.lifecycle.viewModelScope
-import com.namshi.customer.model.NamshiResponse
-import com.namshi.customer.repository.MainRepository
-import com.skydoves.bindables.BindingViewModel
-import com.skydoves.bindables.asBindingProperty
-import com.skydoves.bindables.bindingProperty
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.namshi.customer.network.response.ApiResponse
+import com.namshi.customer.network.response.CarouselContent
+import com.namshi.customer.network.response.HomeContent
+import com.namshi.customer.utils.plusAssign
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
-import javax.inject.Inject
+
+class MainViewModel : ViewModel() {
 
 
-/**
- * Created by @mohamedebrahim96 on 17,November,2021
- * ShopiniWorld, Inc
- * ebrahimm131@gmail.com
- */
-@HiltViewModel
-class MainViewModel @Inject constructor(
-    private val mainRepository: MainRepository
-) : BindingViewModel() {
+    private val homeContent: ApiResponse<HomeContent> = ApiResponse()
+    val homeContentLiveData: MutableLiveData<ApiResponse<HomeContent>> = MutableLiveData(ApiResponse())
 
-    @get:Bindable
-    var isLoading: Boolean by bindingProperty(false)
-        private set
+    private val productList: ApiResponse<CarouselContent> = ApiResponse()
+    val productListLiveData: MutableLiveData<ApiResponse<CarouselContent>> = MutableLiveData(ApiResponse())
 
-    @get:Bindable
-    var toastMessage: String? by bindingProperty(null)
-        private set
-
-    private val homeFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
-    private val homeListFlow = homeFetchingIndex.flatMapLatest { page ->
-        mainRepository.fetchHomeList(
-            onStart = { isLoading = true },
-            onComplete = { isLoading = false },
-            onError = { toastMessage = it }
-        )
-    }
-
-    @get:Bindable
-    val homeList: List<NamshiResponse.Content> by homeListFlow.asBindingProperty(
-        viewModelScope,
-        emptyList()
-    )
+    private val model: MainModel = MainModel()
+    private val subscriptions = CompositeDisposable()
 
     init {
-        Timber.d("init MainViewModel")
+        fetchInitialData()
+    }
+
+    fun refreshMainScreen() = fetchInitialData()
+    fun refreshProductScreen() = getProductList()
+
+    private fun fetchInitialData() {
+        subscriptions += model.getMainScreenContent()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                homeContent.isLoading = true
+                homeContentLiveData.postValue(homeContent)
+            }
+            .subscribe({
+                homeContent.isLoading = false
+                homeContent.data = it
+                homeContent.exception = null
+                homeContentLiveData.postValue(homeContent)
+            }, {
+                Timber.e(it)
+                homeContent.isLoading = false
+                homeContent.exception = it as Exception?
+                homeContentLiveData.postValue(homeContent)
+            })
+    }
+
+    fun getProductList() {
+        subscriptions += model.getProductList()
+            .doOnSubscribe {
+                productList.isLoading = true
+                productListLiveData.postValue(productList)
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                productList.isLoading = false
+                productList.data = it
+                productListLiveData.postValue(productList)
+            }, {
+                Timber.e(it)
+                productList.isLoading = false
+                productList.exception = it as Exception?
+                productListLiveData.postValue(productList)
+            })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        subscriptions.dispose()
     }
 
 }

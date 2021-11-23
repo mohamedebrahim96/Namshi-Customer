@@ -1,6 +1,5 @@
 package com.namshi.customer.ui.details
 
-import com.skydoves.bindables.BindingViewModel
 import dagger.assisted.AssistedInject
 
 
@@ -9,6 +8,6 @@ import dagger.assisted.AssistedInject
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-class DetailViewModel @AssistedInject constructor() : BindingViewModel() {
+class DetailViewModel @AssistedInject constructor() {
 
 }
