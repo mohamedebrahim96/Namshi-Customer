@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<layout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools">-->
+
+<!--    <data>-->
+
+<!--        <variable-->
+<!--            name="vm"-->
+<!--            type="com.namshi.customer.ui.main.MainViewModel" />-->
+
+<!--&lt;!&ndash;        <variable&ndash;&gt;-->
+<!--&lt;!&ndash;            name="adapter"&ndash;&gt;-->
+<!--&lt;!&ndash;            type="com.namshi.customer.ui.main.adapter.HomeAdapter" />&ndash;&gt;-->
+
+<!--    </data>-->
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="vm"
-            type="com.namshi.customer.ui.main.MainViewModel" />
-
-        <variable
-            name="adapter"
-            type="com.namshi.customer.ui.main.adapter.HomeAdapter" />
-
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:clipToPadding="false">
+    android:background="@color/white"
+    android:clipToPadding="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -35,34 +36,32 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:fadeScrollbars="false"
-            android:padding="6dp"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical"
-            app:adapter="@{adapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-            app:submitList="@{vm.homeList}"
-            app:toast="@{vm.toastMessage}"
-            tools:listitem="@layout/item_home" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/recyclerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:fadeScrollbars="false"-->
+<!--            android:padding="6dp"-->
+<!--            android:scrollbarStyle="outsideOverlay"-->
+<!--            android:scrollbars="vertical"-->
+<!--            app:adapter="@{adapter}"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/appBarLayout"-->
+<!--            app:submitList="@{vm.homeList}"-->
+<!--            app:toast="@{vm.toastMessage}"-->
+<!--            tools:listitem="@layout/item_home" />-->
 
-        <ProgressBar
-            android:id="@+id/progressbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressbar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>

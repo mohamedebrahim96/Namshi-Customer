@@ -4,15 +4,23 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.30833333333333335" />
+        <entry key="app/src/main/res/drawable/ic_icons8_info.xml" value="0.4492307692307692" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/layout/activity_first.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_about.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/layout/fragment_grid_product.xml" value="0.2390625" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/layout/item_carousel_sub.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/item_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_image.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_image_sub.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/item_slider.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_slider_sub.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/layout/show_image_dialog.xml" value="0.4401041666666667" />
         <entry key="app/src/main/res/layout/toolbar_home.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.49583333333333335" />
       </map>
     </option>
   </component>

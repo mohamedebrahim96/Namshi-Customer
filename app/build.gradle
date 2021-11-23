@@ -1,9 +1,11 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlinx-serialization'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+
 }
 apply from: "$rootDir/dependencies.gradle"
 
@@ -22,11 +24,11 @@ android {
                 arguments += ["room.schemaLocation" : "$projectDir/schemas".toString()]
             }
         }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments["dagger.hilt.disableuiHaveInstallInCheck"] = "true"
+//            }
+//        }
     }
 
     buildTypes {
@@ -45,9 +47,16 @@ android {
         jvmTarget = "11"
     }
 
+//    kotlinOptions {
+//        jvmTarget = '1.8'
+//    }
     buildFeatures {
-        dataBinding true
+        viewBinding = true
     }
+
+//    buildFeatures {
+//        dataBinding true
+//    }
 
     lintOptions {
         abortOnError false
@@ -70,6 +79,9 @@ android {
         kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlin.time.ExperimentalTime"]
         kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"]
     }
+    kapt {
+        correctErrorTypes true
+    }
 }
 
 dependencies {
@@ -85,9 +97,9 @@ dependencies {
 
 
     // binding
-    implementation ("com.github.skydoves:bindables:$versions.bindablesVersion") {
-        exclude group: "com.google.android.material"
-    }
+//    implementation ("com.github.skydoves:bindables:$versions.bindablesVersion") {
+//        exclude group: "com.google.android.material"
+//    }
 
     // coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
@@ -108,6 +120,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttpVersion"
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
     // moshi
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshiVersion"
@@ -138,5 +152,16 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
 
+
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
+
+    //Serialization
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
+
+
+    //Rx
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
 }
