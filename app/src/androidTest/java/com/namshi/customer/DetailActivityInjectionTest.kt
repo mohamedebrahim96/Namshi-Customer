@@ -23,12 +23,12 @@ class DetailActivityInjectionTest {
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
-    @Test
-    fun verifyInjection() {
-        ActivityScenario.launch(DetailActivity::class.java).use {
-            it.moveToState(Lifecycle.State.CREATED)
-            it.onActivity { activity -> assertThat(activity.viewModel).isNotNull()
-            }
-        }
-    }
+//    @Test
+//    fun verifyInjection() {
+//        ActivityScenario.launch(DetailActivity::class.java).use {
+//            it.moveToState(Lifecycle.State.CREATED)
+//            it.onActivity { activity -> assertThat(activity.viewModel).isNotNull()
+//            }
+//        }
+//    }
 }

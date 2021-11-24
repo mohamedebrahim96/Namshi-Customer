@@ -28,39 +28,39 @@ import kotlin.time.toDuration
  */
 class MainViewModelTest {
 
-    private lateinit var viewModel: MainViewModel
-    private lateinit var mainRepository: MainRepository
-    private val namshiService: NamshiService = mock()
-    private val namshiClient: NamshiClient = NamshiClient(namshiService)
-
-    @get:Rule
-    var coroutinesRule = MainCoroutinesRule()
-
-    @Before
-    fun setup() {
-        mainRepository = MainRepository(namshiClient, Dispatchers.IO)
-        viewModel = MainViewModel(mainRepository)
-    }
-
-    @Test
-    fun fetchContentListTest() = runBlocking {
-        val mockData = MockUtil.mockContentList()
-
-        val fetchedDataFlow = mainRepository.fetchHomeList(
-            onStart = {},
-            onComplete = {},
-            onError = {}
-        ).test(2.toDuration(DurationUnit.SECONDS)) {
-            val item = awaitItem()
-            Assert.assertEquals(item[0].type, "image")
-            Assert.assertEquals(item[0].cols, 1)
-            Assert.assertEquals(item, MockUtil.mockContentList())
-            awaitComplete()
-        }
-
-
-        fetchedDataFlow.apply {
-            // runBlocking should return Unit
-        }
-    }
+//    private lateinit var viewModel: MainViewModel
+//    private lateinit var mainRepository: MainRepository
+//    private val namshiService: NamshiService = mock()
+//    private val namshiClient: NamshiClient = NamshiClient(namshiService)
+//
+//    @get:Rule
+//    var coroutinesRule = MainCoroutinesRule()
+//
+//    @Before
+//    fun setup() {
+//        mainRepository = MainRepository(namshiClient, Dispatchers.IO)
+//        viewModel = MainViewModel(mainRepository)
+//    }
+//
+//    @Test
+//    fun fetchContentListTest() = runBlocking {
+//        val mockData = MockUtil.mockContentList()
+//
+//        val fetchedDataFlow = mainRepository.fetchHomeList(
+//            onStart = {},
+//            onComplete = {},
+//            onError = {}
+//        ).test(2.toDuration(DurationUnit.SECONDS)) {
+//            val item = awaitItem()
+//            Assert.assertEquals(item[0].type, "image")
+//            Assert.assertEquals(item[0].cols, 1)
+//            Assert.assertEquals(item, MockUtil.mockContentList())
+//            awaitComplete()
+//        }
+//
+//
+//        fetchedDataFlow.apply {
+//            // runBlocking should return Unit
+//        }
+//    }
 }

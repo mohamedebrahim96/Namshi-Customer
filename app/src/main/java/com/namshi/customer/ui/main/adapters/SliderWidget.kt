@@ -11,15 +11,16 @@ import com.namshi.customer.base.BaseFragment
 import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemSliderSubBinding
 import com.namshi.customer.model.Image
+import com.namshi.customer.ui.main.adapters.SliderWidget.Companion.AUT0_SCROLL_TIMER
 import com.namshi.customer.utils.ActionListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
-import com.namshi.customer.utils.onClick
 
 /**
  * Displays one image at a time, which auto jump to next item after [AUT0_SCROLL_TIMER]
-* */
-class SliderWidget(private val fragment: BaseFragment, private val listener: ActionListener) : BaseAdapter<SliderWidget.Holder>(fragment) {
+ * */
+class SliderWidget(private val fragment: BaseFragment, private val listener: ActionListener) :
+    BaseAdapter<SliderWidget.Holder>(fragment) {
 
     private val items: MutableList<Image> = mutableListOf()
     private val handler
@@ -71,8 +72,10 @@ class SliderWidget(private val fragment: BaseFragment, private val listener: Act
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(LayoutInflater.from(parent.context).inflate(R.layout.item_slider_sub, parent, false)).apply {
-            itemView.onClick() {
+        return Holder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_slider_sub, parent, false)
+        ).apply {
+            itemView.setOnClickListener() {
                 val item = items[adapterPosition]
                 listener.onItemClick(item)
             }

@@ -12,7 +12,6 @@ import com.namshi.customer.databinding.ItemImageSubBinding
 import com.namshi.customer.utils.ActionListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
-import com.namshi.customer.utils.onClick
 
 /**
  * Takes a list of images and displays them in a column of full width of screen.
@@ -24,7 +23,7 @@ class ImageWidget(private val listener: ActionListener) : BaseAdapter<ImageWidge
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.item_image_sub, parent, false)).apply {
-            itemView.onClick() {
+            itemView.setOnClickListener() {
                 val item = items[adapterPosition]
                 listener.onItemClick(item)
             }

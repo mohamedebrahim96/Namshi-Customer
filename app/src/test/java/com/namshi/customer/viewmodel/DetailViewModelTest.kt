@@ -19,22 +19,22 @@ import org.junit.Test
  */
 class DetailViewModelTest {
 
-    private lateinit var viewModel: DetailViewModel
-    private lateinit var detailRepository: DetailRepository
-    private val namshiService: NamshiService = mock()
-    private val namshiClient: NamshiClient = NamshiClient(namshiService)
-
-
-    @get:Rule
-    var coroutinesRule = MainCoroutinesRule()
-
-    @Before
-    fun setup() {
-
-    }
-
-    @Test
-    fun fetchPokemonInfoTest() = runBlocking {
-
-    }
+//    private lateinit var viewModel: DetailViewModel
+//    private lateinit var detailRepository: DetailRepository
+//    private val namshiService: NamshiService = mock()
+//    private val namshiClient: NamshiClient = NamshiClient(namshiService)
+//
+//
+//    @get:Rule
+//    var coroutinesRule = MainCoroutinesRule()
+//
+//    @Before
+//    fun setup() {
+//
+//    }
+//
+//    @Test
+//    fun fetchPokemonInfoTest() = runBlocking {
+//
+//    }
 }

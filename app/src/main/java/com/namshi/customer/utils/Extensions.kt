@@ -29,11 +29,6 @@ infix fun ImageView.load(image: Image?) {
 }
 
 
-fun View.onClick(action: (view: View) -> Unit) {
-    setOnClickListener(action)
-}
-
-
 fun View.show() {
     visibility = View.VISIBLE
 }

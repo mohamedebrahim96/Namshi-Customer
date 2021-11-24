@@ -10,13 +10,9 @@ import com.namshi.customer.model.Image
 import com.namshi.customer.utils.ActionListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
-import com.namshi.customer.utils.onClick
 
-/**
- * Displays products in a grid
- * */
-class ProductGridAdapter(private val listener: ActionListener) :
-    RecyclerView.Adapter<ProductGridAdapter.Holder>() {
+class DetailsAdapter(private val listener: ActionListener) :
+    RecyclerView.Adapter<DetailsAdapter.Holder>() {
 
     private val items: MutableList<Image> = mutableListOf()
 
@@ -24,7 +20,7 @@ class ProductGridAdapter(private val listener: ActionListener) :
         return Holder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_grid, parent, false)
         ).apply {
-            itemView.onClick() {
+            itemView.setOnClickListener {
                 val image = items[adapterPosition]
                 listener.onItemClick(image)
             }

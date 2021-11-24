@@ -1,6 +1,5 @@
 package com.namshi.customer.model
 
-import com.namshi.customer.utils.Constant
 import com.namshi.customer.utils.dpToPx
 import kotlinx.serialization.Serializable
 
@@ -13,9 +12,9 @@ data class NamshiWidget(
     val cols: Int = -1,
     val show: Int = -1, //Carousel or Slider
     val images: MutableList<Image> = mutableListOf(),
-    val title: String = Constant.EMPTY_STR, //Carousel Title
+    val title: String = "", //Carousel Title
     val height: Int = -1, //Carousel Height
-    val url: String = Constant.EMPTY_STR, //Carousel API URL
+    val url: String = "", //Carousel API URL
 ) {
 
     val heightPx: Int
