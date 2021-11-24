@@ -1,7 +1,6 @@
 package com.namshi.customer
 
 import android.app.Application
-import com.namshi.customer.misc.HyperlinkedDebugTree
 import dagger.hilt.android.HiltAndroidApp
 import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
@@ -29,12 +28,7 @@ class NamshiApp : Application(){
         instance = this
 
 
-        initTimber()
         initRxErrorHandler()
-    }
-
-    private fun initTimber() {
-        Timber.plant(HyperlinkedDebugTree())
     }
 
     private fun initRxErrorHandler() {
