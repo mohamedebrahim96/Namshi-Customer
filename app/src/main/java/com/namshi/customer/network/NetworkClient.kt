@@ -1,8 +1,8 @@
 package com.namshi.customer.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.namshi.customer.misc.json
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,6 +22,7 @@ object NetworkClient {
         .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) })
         .build()
 
+    val json = Json { isLenient = true; coerceInputValues = true }
     private val jsonConverter = json.asConverterFactory("application/json".toMediaType())
     private val rxCallbacks = RxJava3CallAdapterFactory.create()
 
