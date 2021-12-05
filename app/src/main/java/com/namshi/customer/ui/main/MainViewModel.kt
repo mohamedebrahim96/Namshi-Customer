@@ -2,7 +2,7 @@ package com.namshi.customer.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.namshi.customer.network.response.ApiResponse
+import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.network.response.CarouselContent
 import com.namshi.customer.network.response.HomeContent
 import com.namshi.customer.utils.plusAssign
@@ -20,11 +20,11 @@ import timber.log.Timber
 class MainViewModel : ViewModel() {
 
 
-    private val homeContent: ApiResponse<HomeContent> = ApiResponse()
-    val homeContentLiveData: MutableLiveData<ApiResponse<HomeContent>> = MutableLiveData(ApiResponse())
+    private val homeContent: NamshiResponse<HomeContent> = NamshiResponse()
+    val homeContentLiveData: MutableLiveData<NamshiResponse<HomeContent>> = MutableLiveData(NamshiResponse())
 
-    private val productList: ApiResponse<CarouselContent> = ApiResponse()
-    val productListLiveData: MutableLiveData<ApiResponse<CarouselContent>> = MutableLiveData(ApiResponse())
+    private val productList: NamshiResponse<CarouselContent> = NamshiResponse()
+    val productListLiveData: MutableLiveData<NamshiResponse<CarouselContent>> = MutableLiveData(NamshiResponse())
 
     private val model: MainModel = MainModel()
     private val subscriptions = CompositeDisposable()

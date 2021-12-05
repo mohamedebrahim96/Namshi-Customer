@@ -7,6 +7,12 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import timber.log.Timber
 
+
+/**
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 abstract class BaseFragment : Fragment() {
 
     abstract val screenTitle: String?

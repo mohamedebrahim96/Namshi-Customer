@@ -11,14 +11,15 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
 /**
- * Network module for the whole app
- * Generates serializers and callback factories, loggers etc
-* */
+ * Created by @mohamedebrahim96 on 18,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 @ExperimentalSerializationApi
 object NetworkClient {
 
     private val okHttp = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) })
+        .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
         .build()
 
     val json = Json { isLenient = true; coerceInputValues = true }

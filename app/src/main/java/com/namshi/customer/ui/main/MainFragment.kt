@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.namshi.customer.base.BaseFragment
 import com.namshi.customer.databinding.FragmentMainBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.network.response.ApiResponse
+import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.network.response.HomeContent
 import com.namshi.customer.ui.details.DetailsFragment
 import com.namshi.customer.ui.main.adapters.MainWidget
@@ -68,7 +68,7 @@ class MainFragment : BaseFragment(), ClickListener {
         _binding = null
     }
 
-    private fun setData(response: ApiResponse<HomeContent>) {
+    private fun setData(response: NamshiResponse<HomeContent>) {
         val data = response.data
 
         binding.mainRefresh.isRefreshing = response.isLoading

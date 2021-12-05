@@ -14,8 +14,10 @@ import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
 
 /**
- * Adapter to display [NamshiWidget.Type]
- * */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 class CarouselWidget(private val listener: ClickListener) :
     BaseAdapter<CarouselWidget.Holder>() {
     private val items: MutableList<Image> = mutableListOf()
@@ -25,14 +27,14 @@ class CarouselWidget(private val listener: ClickListener) :
             LayoutInflater.from(parent.context).inflate(R.layout.item_carousel_sub, parent, false)
         ).apply {
             itemView.setOnClickListener {
-                val image = items[adapterPosition]
+                val image = items[bindingAdapterPosition]
                 listener.onItemClick(image)
             }
         }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val widget = items[holder.adapterPosition]
+        val widget = items[holder.bindingAdapterPosition]
         holder.bind(widget)
     }
 

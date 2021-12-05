@@ -11,14 +11,15 @@ import com.namshi.customer.base.BaseFragment
 import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemSliderSubBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.ui.main.adapters.SliderWidget.Companion.AUT0_SCROLL_TIMER
 import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
 
 /**
- * Displays one image at a time, which auto jump to next item after [AUT0_SCROLL_TIMER]
- * */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 class SliderWidget(private val fragment: BaseFragment, private val listener: ClickListener) :
     BaseAdapter<SliderWidget.Holder>(fragment) {
 
@@ -74,7 +75,7 @@ class SliderWidget(private val fragment: BaseFragment, private val listener: Cli
         return Holder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_slider_sub, parent, false)
         ).apply {
-            itemView.setOnClickListener() {
+            itemView.setOnClickListener {
                 val item = items[bindingAdapterPosition]
                 listener.onItemClick(item)
             }

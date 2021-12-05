@@ -10,7 +10,7 @@ import com.namshi.customer.model.Image
 import com.namshi.customer.databinding.FragmentGridProductBinding
 import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.ui.main.MainViewModel
-import com.namshi.customer.network.response.ApiResponse
+import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.network.response.CarouselContent
 import com.namshi.customer.ui.details.adapters.DetailsAdapter
 import com.namshi.customer.utils.ShowImage
@@ -70,7 +70,7 @@ class DetailsFragment : BaseFragment(), ClickListener {
         ShowImage.showImage(requireContext(), image.url)
     }
 
-    private fun setData(response: ApiResponse<CarouselContent>) {
+    private fun setData(response: NamshiResponse<CarouselContent>) {
         val data = response.data
         binding.gridRefresh.isRefreshing = response.isLoading && data == null
         binding.errorLayout.showIf(response.exception != null && data == null)

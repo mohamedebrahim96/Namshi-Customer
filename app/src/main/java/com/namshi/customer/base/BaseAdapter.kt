@@ -2,21 +2,17 @@ package com.namshi.customer.base
 
 import android.view.View
 import androidx.core.view.children
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.recyclerview.widget.RecyclerView
 
+
 /**
- * Base recycler view adapter for easy access to common things like
- * 1. attached frag and recycler view instance
- * 2. clear resources onStop
- *
- *
- * Also optional connection to Lifecycle if fragment is provided.
- * children get access to clearHolders method which is invoked on lifecycles onStart and onStop methods.
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
  */
-abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) : RecyclerView.Adapter<T>(), LifecycleObserver {
+abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) :
+    RecyclerView.Adapter<T>(), LifecycleObserver {
 
     protected var rv: RecyclerView? = null
 
@@ -26,7 +22,6 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
     init {
         fragment?.viewLifecycleOwner?.lifecycle?.addObserver(this)
     }
-
 
     open fun onStart() {
         notifyDataSetChanged()
@@ -80,14 +75,17 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
         return position != RecyclerView.NO_POSITION && position < itemCount
     }
 
-    internal fun viewHolderForAdapterPosition(position: Int) = rv?.findViewHolderForAdapterPosition(position) as? T
+    internal fun viewHolderForAdapterPosition(position: Int) =
+        rv?.findViewHolderForAdapterPosition(position) as? T
 
-    internal fun viewHolderForLayoutPosition(position: Int) = rv?.findViewHolderForLayoutPosition(position) as? T
+    internal fun viewHolderForLayoutPosition(position: Int) =
+        rv?.findViewHolderForLayoutPosition(position) as? T
 
 
 }
 
-abstract class BaseViewHolder<T>(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+abstract class BaseViewHolder<T>(override val containerView: View) :
+    RecyclerView.ViewHolder(containerView), LayoutContainer {
     abstract fun bind(data: T)
 }
 

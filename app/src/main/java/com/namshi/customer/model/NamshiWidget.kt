@@ -3,18 +3,21 @@ package com.namshi.customer.model
 import com.namshi.customer.utils.dpToPx
 import kotlinx.serialization.Serializable
 
+
 /**
- * Parent Data model class which holds data depending on type of [NamshiWidget.Type]
-* */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 @Serializable
 data class NamshiWidget(
     val type: Type = Type.unknown,
     val cols: Int = -1,
-    val show: Int = -1, //Carousel or Slider
+    val show: Int = -1,
     val images: MutableList<Image> = mutableListOf(),
-    val title: String = "", //Carousel Title
-    val height: Int = -1, //Carousel Height
-    val url: String = "", //Carousel API URL
+    val title: String = "",
+    val height: Int = -1,
+    val url: String = "",
 ) {
 
     val heightPx: Int

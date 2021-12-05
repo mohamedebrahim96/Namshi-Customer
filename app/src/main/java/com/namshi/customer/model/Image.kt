@@ -3,9 +3,12 @@ package com.namshi.customer.model
 import com.namshi.customer.utils.dpToPx
 import kotlinx.serialization.Serializable
 
+
 /**
- * Image data class type which represents an Image from API response
- * */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 @Serializable
 data class Image(
     val url: String = "",

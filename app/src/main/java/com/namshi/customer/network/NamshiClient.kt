@@ -1,6 +1,6 @@
 package com.namshi.customer.network
 
-import com.namshi.customer.model.NamshiResponse
+import com.namshi.customer.model.NamshiResponses
 import com.skydoves.sandwich.ApiResponse
 import javax.inject.Inject
 
@@ -14,6 +14,6 @@ class NamshiClient @Inject constructor(
     private val namshiService: NamshiService
 ) {
 
-    suspend fun fetchHomeList(): ApiResponse<NamshiResponse> =
+    suspend fun fetchHomeList(): ApiResponse<NamshiResponses> =
         namshiService.fetchHomeList()
 }

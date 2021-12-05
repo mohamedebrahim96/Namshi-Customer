@@ -1,8 +1,5 @@
 package com.namshi.customer.binding
 
-import androidx.recyclerview.widget.RecyclerView
-import com.skydoves.whatif.whatIfNotNullAs
-
 
 /**
  * Created by @mohamedebrahim96 on 18,November,2021
