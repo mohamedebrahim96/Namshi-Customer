@@ -49,5 +49,9 @@ class DetailViewModel @Inject constructor(
         Timber.d("init MainViewModel")
     }
 
+    fun refreshProductScreen() {
+        productFetchingIndex.value++
+    }
+
 
 }

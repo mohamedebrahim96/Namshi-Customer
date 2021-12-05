@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.activityViewModels
 import com.namshi.customer.R
 import com.namshi.customer.databinding.FragmentDetailsBinding
@@ -24,7 +26,11 @@ class DetailsFragment : BindingFragment<FragmentDetailsBinding>(R.layout.fragmen
     ClickListener {
 
 
-    private val detailViewModel: DetailViewModel by activityViewModels()
+    @get:VisibleForTesting
+    internal val detailViewModel: DetailViewModel by activityViewModels()
+
+
+
     private val detailsAdapter =
         DetailsAdapter(this)
 
@@ -39,6 +45,9 @@ class DetailsFragment : BindingFragment<FragmentDetailsBinding>(R.layout.fragmen
             vm = detailViewModel
             adapter = detailsAdapter
         }.root
+
+//        binding.gridRefresh.setOnRefreshListener { detailViewModel.refreshProductScreen() }
+//        binding.errorLayout.setOnClickListener { detailViewModel.refreshProductScreen() }
     }
 
     override fun onItemClick(image: Image) {
