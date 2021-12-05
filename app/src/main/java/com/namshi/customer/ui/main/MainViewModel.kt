@@ -28,7 +28,6 @@ class MainViewModel @Inject constructor(
     val homeContentLiveData: MutableLiveData<NamshiResponse<HomeContent>> =
         MutableLiveData(NamshiResponse())
 
-    private val model: MainModel = MainModel()
     private val subscriptions = CompositeDisposable()
 
     init {
@@ -38,7 +37,7 @@ class MainViewModel @Inject constructor(
     fun refreshMainScreen() = fetchInitialData()
 
     private fun fetchInitialData() {
-        subscriptions += model.getMainScreenContent()
+        subscriptions += mainRepository.getMainScreenContent()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {

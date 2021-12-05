@@ -26,7 +26,7 @@ object NetworkClient {
     private val jsonConverter = json.asConverterFactory("application/json".toMediaType())
     private val rxCallbacks = RxJava3CallAdapterFactory.create()
 
-    fun api(): Api {
+    fun api(): NamshiService {
         val retrofit = Retrofit.Builder()
             .client(okHttp)
             .baseUrl(Constants.BASE_URL)
@@ -34,6 +34,6 @@ object NetworkClient {
             .addCallAdapterFactory(rxCallbacks)
             .build()
 
-        return retrofit.create(Api::class.java)
+        return retrofit.create(NamshiService::class.java)
     }
 }

@@ -38,28 +38,13 @@ class MainFragment : BindingFragment<FragmentMainBinding>(R.layout.fragment_main
     }
 
 
-//    override val screenTitle: String
-//        get() = "Home Screen"
-
-    //private val viewModel: MainViewModel by activityViewModels()
-
     @get:VisibleForTesting
     internal val viewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentMainBinding? = null
 
-    //private val binding get() = _binding!!
 
     private lateinit var adapter: MainWidget
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        _binding = FragmentMainBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,7 +85,7 @@ class MainFragment : BindingFragment<FragmentMainBinding>(R.layout.fragment_main
     override fun onItemClick(image: Image) {
         addFragment(
             activity = requireActivity() as AppCompatActivity,
-            fragment = DetailsFragment.newInstance(),
+            fragment = DetailsFragment(),
             replace = true, addToBackStack = true
         )
     }

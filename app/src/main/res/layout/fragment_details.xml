@@ -3,7 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="vm"
+            type="com.namshi.customer.ui.details.DetailViewModel" />
 
+        <variable
+            name="adapter"
+            type="com.namshi.customer.ui.details.adapters.DetailsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,12 +28,22 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/grid_recycler"
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
+                    android:layout_height="0dp"
+                    android:clipToPadding="false"
+                    android:fadeScrollbars="false"
+                    android:padding="6dp"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical"
+                    app:adapter="@{adapter}"
                     app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appBarLayout"
                     app:spanCount="2"
+                    app:submitList="@{vm.productList2}"
+                    app:toast="@{vm.toastMessage}"
                     tools:listitem="@layout/item_grid" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
