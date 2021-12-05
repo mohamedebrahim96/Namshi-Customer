@@ -1,13 +1,5 @@
 package com.namshi.customer.binding
 
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.widget.AppCompatImageView
-import com.bumptech.glide.Glide
-import com.github.florent37.glidepalette.BitmapPalette
-import com.github.florent37.glidepalette.GlidePalette
-import com.skydoves.whatif.whatIfNotNullOrEmpty
-
 
 /**
  * Created by @mohamedebrahim96 on 18,November,2021

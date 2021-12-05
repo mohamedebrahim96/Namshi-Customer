@@ -7,21 +7,18 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import com.bumptech.glide.Glide
 import com.namshi.customer.R
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 
+/**
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 abstract class BaseActivity : AppCompatActivity() {
-
-    protected val subscriptions = CompositeDisposable()
 
     override fun onPause() {
         super.onPause()
         Glide.get(this).clearMemory()
-    }
-
-    override fun onDestroy() {
-        subscriptions.clear()
-        super.onDestroy()
     }
 
     /**

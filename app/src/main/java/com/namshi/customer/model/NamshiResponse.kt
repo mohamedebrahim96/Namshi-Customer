@@ -1,59 +1,28 @@
-package com.namshi.customer.model
+package com.namshi.customer.network.response
 
-import android.os.Parcelable
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import kotlinx.parcelize.Parcelize
-
+import com.namshi.customer.model.Image
+import com.namshi.customer.model.NamshiWidget
+import kotlinx.serialization.Serializable
 
 /**
- * Created by @mohamedebrahim96 on 18,November,2021
+ * Created by @mohamedebrahim96 on 21,November,2021
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-@Parcelize
-@JsonClass(generateAdapter = true)
-data class NamshiResponse(
-    @field:Json(name = "content") val content: List<Content>
-) : Parcelable {
-    @Parcelize
-    @JsonClass(generateAdapter = true)
-    data class Content(
-        @field:Json(name = "type") var type: Type,
-        @field:Json(name = "cols") val cols: Int = -1,
-        @field:Json(name = "images") var images: List<Images>?,
-        @field:Json(name = "show") val show: Int = -1,
-        @field:Json(name = "title") val title: String = "",
-        @field:Json(name = "height") val height: Int = -1,
-        @field:Json(name = "url") val url: String = "",
-    ) : Parcelable {
-        @Parcelize
-        @JsonClass(generateAdapter = true)
-        data class Images(
-            @field:Json(name = "url") var url: String,
-            @field:Json(name = "width") var width: Int,
-            @field:Json(name = "height") var height: Int,
-            @field:Json(name = "format") var format: String
-        ) : Parcelable
-
-
-        enum class Type : ViewType {
-            image {
-                override val asInt: Int get() = 1
-            },
-            carousel {
-                override val asInt: Int get() = 2
-            },
-            slider {
-                override val asInt: Int get() = 3
-            },
-            unknown {
-                override val asInt: Int get() = -1
-            }
-        }
-
-        interface ViewType {
-            val asInt: Int
-        }
-    }
+class NamshiResponse<T> {
+    var isLoading: Boolean = false
+    var exception: Exception? = null
+    var data: T? = null
 }
+
+/**
+ * API 1 Response
+ * */
+@Serializable
+data class HomeContent(val content: List<NamshiWidget> = listOf())
+
+/**
+ * API 2, 3, 4 Response
+* */
+@Serializable
+data class CarouselContent(val images: List<Image> = listOf(), var url: String = "")

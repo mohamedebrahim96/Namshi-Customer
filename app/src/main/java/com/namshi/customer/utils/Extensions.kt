@@ -12,9 +12,10 @@ import io.reactivex.rxjava3.disposables.Disposable
 
 
 /**
- * Takes an [Image] and loads into [ImageView] using Glide
- * Respects the aspect ratio.
- * */
+ * Created by @mohamedebrahim96 on 18,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 infix fun ImageView.load(image: Image?) {
 
     var req = Glide.with(this)

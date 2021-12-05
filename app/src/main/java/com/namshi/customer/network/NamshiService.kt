@@ -1,6 +1,6 @@
 package com.namshi.customer.network
 
-import com.namshi.customer.model.NamshiResponse
+import com.namshi.customer.model.NamshiResponses
 import com.skydoves.sandwich.ApiResponse
 import retrofit2.http.GET
 
@@ -13,6 +13,6 @@ import retrofit2.http.GET
 interface NamshiService {
 
     @GET("content")
-    suspend fun fetchHomeList(): ApiResponse<NamshiResponse>
+    suspend fun fetchHomeList(): ApiResponse<NamshiResponses>
 
 }

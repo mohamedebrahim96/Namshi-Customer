@@ -18,8 +18,10 @@ import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.gone
 
 /**
- * Main Screen Adapter that identifies the type of [NamshiWidget] and assigns the appropriate view and adapters based on respective [NamshiWidget.Type]
- * */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 class MainWidget(private val fragment: BaseFragment, private val listener: ClickListener) : BaseAdapter<MainWidget.Holder>(fragment) {
 
     private val items: MutableList<NamshiWidget> = mutableListOf()
@@ -44,7 +46,7 @@ class MainWidget(private val fragment: BaseFragment, private val listener: Click
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val widget = items[holder.adapterPosition]
+        val widget = items[holder.bindingAdapterPosition]
         when (holder.itemViewType) {
             NamshiWidget.Type.image.asInt -> {
                 ItemImageBinding.bind(holder.itemView).apply {
