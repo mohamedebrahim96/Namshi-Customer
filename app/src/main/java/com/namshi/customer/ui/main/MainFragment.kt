@@ -4,22 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.namshi.customer.base.BaseFragment
-import com.namshi.customer.model.Image
 import com.namshi.customer.databinding.FragmentMainBinding
-import com.namshi.customer.utils.ActionListener
-import com.namshi.customer.ui.main.adapters.MainWidget
-import com.namshi.customer.ui.details.DetailsFragment
+import com.namshi.customer.model.Image
 import com.namshi.customer.network.response.ApiResponse
 import com.namshi.customer.network.response.HomeContent
+import com.namshi.customer.ui.details.DetailsFragment
+import com.namshi.customer.ui.main.adapters.MainWidget
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.showIf
 
 /**
- * A simple [Fragment] subclass as the default destination in the navigation.
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
  */
-class MainFragment : BaseFragment(), ActionListener {
+class MainFragment : BaseFragment(), ClickListener {
 
 
     companion object {
@@ -39,13 +40,15 @@ class MainFragment : BaseFragment(), ActionListener {
 
     private var _binding: FragmentMainBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private lateinit var adapter: MainWidget
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,7 +59,7 @@ class MainFragment : BaseFragment(), ActionListener {
         adapter = MainWidget(this, this)
         binding.mainRecycler.adapter = adapter
         binding.mainRefresh.setOnRefreshListener { viewModel.refreshMainScreen() }
-        binding.errorLayout.setOnClickListener{ viewModel.refreshMainScreen() }
+        binding.errorLayout.setOnClickListener { viewModel.refreshMainScreen() }
         viewModel.homeContentLiveData.observe(viewLifecycleOwner, ::setData)
     }
 

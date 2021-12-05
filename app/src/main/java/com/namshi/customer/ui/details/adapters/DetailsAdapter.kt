@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.namshi.customer.R
 import com.namshi.customer.databinding.ItemGridBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.utils.ActionListener
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
 
-class DetailsAdapter(private val listener: ActionListener) :
+/**
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
+class DetailsAdapter(private val listener: ClickListener) :
     RecyclerView.Adapter<DetailsAdapter.Holder>() {
 
     private val items: MutableList<Image> = mutableListOf()
@@ -21,14 +26,14 @@ class DetailsAdapter(private val listener: ActionListener) :
             LayoutInflater.from(parent.context).inflate(R.layout.item_grid, parent, false)
         ).apply {
             itemView.setOnClickListener {
-                val image = items[adapterPosition]
+                val image = items[bindingAdapterPosition]
                 listener.onItemClick(image)
             }
         }
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val image = items[holder.adapterPosition]
+        val image = items[holder.bindingAdapterPosition]
         ItemGridBinding.bind(holder.itemView).apply {
             gridImage load image
         }

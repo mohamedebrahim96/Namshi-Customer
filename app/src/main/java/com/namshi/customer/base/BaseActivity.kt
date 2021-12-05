@@ -1,12 +1,6 @@
 package com.namshi.customer.base
 
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.PersistableBundle
-import androidx.annotation.TransitionRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -19,13 +13,6 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 abstract class BaseActivity : AppCompatActivity() {
 
     protected val subscriptions = CompositeDisposable()
-    protected val handler = Handler(Looper.getMainLooper())
-
-
-    companion object {
-
-    }
-
 
     override fun onPause() {
         super.onPause()

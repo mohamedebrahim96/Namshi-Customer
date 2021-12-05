@@ -7,10 +7,10 @@ import com.namshi.customer.utils.clearAndAddAll
 import io.reactivex.rxjava3.core.Observable
 
 /**
- * Grabs Data from the [MainRepo]
- * - Main Screen content
- * - Product List
-* */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 class MainModel {
 
     private val repo = MainRepo()

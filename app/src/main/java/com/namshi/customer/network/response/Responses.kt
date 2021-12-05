@@ -5,8 +5,10 @@ import com.namshi.customer.model.NamshiWidget
 import kotlinx.serialization.Serializable
 
 /**
- * Common wrapper class for response to understand it's state
-* */
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
+ */
 class ApiResponse<T> {
     var isLoading: Boolean = false
     var exception: Exception? = null

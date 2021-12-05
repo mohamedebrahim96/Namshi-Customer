@@ -1,6 +1,7 @@
 package com.namshi.customer.network
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.namshi.customer.utils.Constants
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -16,8 +17,6 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 @ExperimentalSerializationApi
 object NetworkClient {
 
-    private const val BASE_URL = "https://demo8082631.mockable.io/"
-
     private val okHttp = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BASIC) })
         .build()
@@ -29,7 +28,7 @@ object NetworkClient {
     fun api(): Api {
         val retrofit = Retrofit.Builder()
             .client(okHttp)
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(jsonConverter)
             .addCallAdapterFactory(rxCallbacks)
             .build()

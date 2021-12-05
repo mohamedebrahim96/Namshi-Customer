@@ -28,21 +28,4 @@ object ShowImage {
         alertadd.setView(view)
         alertadd.show()
     }
-
-    fun setupImageBitmap(mContext: Context, bitmap: Bitmap) {
-        val settingsDialog = Dialog(mContext)
-        val li =
-            mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        settingsDialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
-        settingsDialog.setContentView(
-            li.inflate(R.layout.show_image_dialog, null)
-        )
-        settingsDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        val profileImage = settingsDialog.findViewById<ImageView>(R.id.dialogImageview)
-        profileImage.setImageBitmap(bitmap)
-        settingsDialog.show()
-        profileImage.setOnClickListener {
-            settingsDialog.dismiss()
-        }
-    }
 }

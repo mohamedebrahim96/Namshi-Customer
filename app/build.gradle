@@ -19,16 +19,6 @@ android {
         versionName versions.versionName
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "com.namshi.customer.AppTestRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += ["room.schemaLocation": "$projectDir/schemas".toString()]
-            }
-        }
-//        javaCompileOptions {
-//            annotationProcessorOptions {
-//                arguments["dagger.hilt.disableuiHaveInstallInCheck"] = "true"
-//            }
-//        }
     }
 
     buildTypes {
@@ -47,9 +37,6 @@ android {
         jvmTarget = "11"
     }
 
-//    kotlinOptions {
-//        jvmTarget = '1.8'
-//    }
     buildFeatures {
         viewBinding = true
     }

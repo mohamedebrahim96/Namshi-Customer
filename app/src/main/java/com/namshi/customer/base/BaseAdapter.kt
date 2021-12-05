@@ -28,13 +28,11 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
     }
 
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
     open fun onStart() {
         notifyDataSetChanged()
 
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     open fun onStop() {
         rv?.children
             ?.mapIndexed { _, view -> rv?.getChildViewHolder(view) }
@@ -42,15 +40,12 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
             ?.forEach { clearHolder(it as T) }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     open fun onPause() {
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     open fun onResume() {
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onDestroy() {
         fragment = null
         rv = null
