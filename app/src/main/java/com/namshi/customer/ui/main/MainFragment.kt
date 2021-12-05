@@ -4,24 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import com.namshi.customer.base.BaseFragment
+import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.viewModels
+import com.namshi.customer.R
 import com.namshi.customer.databinding.FragmentMainBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.network.response.HomeContent
+import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.ui.details.DetailsFragment
 import com.namshi.customer.ui.main.adapters.MainWidget
 import com.namshi.customer.utils.ClickListener
+import com.namshi.customer.utils.SetupFragmentUtil.addFragment
 import com.namshi.customer.utils.showIf
+import com.skydoves.bindables.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by @mohamedebrahim96 on 21,November,2021
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-class MainFragment : BaseFragment(), ClickListener {
-
+@AndroidEntryPoint
+class MainFragment : BindingFragment<FragmentMainBinding>(R.layout.fragment_main), ClickListener {
 
     companion object {
         fun newInstance(): MainFragment {
@@ -33,24 +38,36 @@ class MainFragment : BaseFragment(), ClickListener {
     }
 
 
-    override val screenTitle: String
-        get() = "Home Screen"
+//    override val screenTitle: String
+//        get() = "Home Screen"
 
-    private val viewModel: MainViewModel by activityViewModels()
+    //private val viewModel: MainViewModel by activityViewModels()
+
+    @get:VisibleForTesting
+    internal val viewModel: MainViewModel by viewModels()
 
     private var _binding: FragmentMainBinding? = null
 
-    private val binding get() = _binding!!
+    //private val binding get() = _binding!!
 
     private lateinit var adapter: MainWidget
+
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        _binding = FragmentMainBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
-        return binding.root
+        super.onCreateView(inflater, container, savedInstanceState)
+        return binding {}.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,6 +98,10 @@ class MainFragment : BaseFragment(), ClickListener {
     }
 
     override fun onItemClick(image: Image) {
-        activity?.addFragment(DetailsFragment.newInstance(), true, addToBackStack = true)
+        addFragment(
+            activity = requireActivity() as AppCompatActivity,
+            fragment = DetailsFragment.newInstance(),
+            replace = true, addToBackStack = true
+        )
     }
 }

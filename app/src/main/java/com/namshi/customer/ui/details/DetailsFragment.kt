@@ -5,24 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.namshi.customer.base.BaseFragment
+import com.namshi.customer.R
+import com.namshi.customer.databinding.FragmentDetailsBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.databinding.FragmentGridProductBinding
-import com.namshi.customer.utils.ClickListener
-import com.namshi.customer.ui.main.MainViewModel
-import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.network.response.CarouselContent
+import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.ui.details.adapters.DetailsAdapter
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.ShowImage
 import com.namshi.customer.utils.showIf
+import com.skydoves.bindables.BindingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Created by @mohamedebrahim96 on 21,November,2021
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-class DetailsFragment : BaseFragment(), ClickListener {
-
+@AndroidEntryPoint
+class DetailsFragment : BindingFragment<FragmentDetailsBinding>(R.layout.fragment_details),
+    ClickListener {
     companion object {
         fun newInstance(): DetailsFragment {
             val args = Bundle()
@@ -32,38 +34,31 @@ class DetailsFragment : BaseFragment(), ClickListener {
         }
     }
 
-    override val screenTitle: String
-        get() = "ProductGridFragment"
-
-    private var _binding: FragmentGridProductBinding? = null
-
-    private val binding get() = _binding!!
-
-    private val viewModel: MainViewModel by activityViewModels()
+    private val detailViewModel: DetailViewModel by activityViewModels()
     private lateinit var adapter: DetailsAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getProductList()
+        detailViewModel.getProductList()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentGridProductBinding.inflate(inflater, container, false)
-        return binding.root
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        super.onCreateView(inflater, container, savedInstanceState)
+        return binding {}.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.gridRecycler.adapter = DetailsAdapter(this@DetailsFragment).also { adapter = it }
-        binding.gridRefresh.setOnRefreshListener { viewModel.refreshProductScreen() }
-        binding.errorLayout.setOnClickListener { viewModel.refreshProductScreen() }
-        viewModel.productListLiveData.observe(viewLifecycleOwner, ::setData)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        binding.gridRefresh.setOnRefreshListener { detailViewModel.refreshProductScreen() }
+        binding.errorLayout.setOnClickListener { detailViewModel.refreshProductScreen() }
+        detailViewModel.productListLiveData.observe(viewLifecycleOwner, ::setData)
     }
 
     override fun onItemClick(image: Image) {

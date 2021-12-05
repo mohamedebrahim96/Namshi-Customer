@@ -8,7 +8,6 @@ import com.namshi.customer.base.BaseAdapter
 import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemCarouselSubBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -10,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+        tools:context=".ui.details.DetailsFragment">
 
 
         <FrameLayout
@@ -18,25 +17,19 @@
             android:layout_height="match_parent">
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                android:id="@+id/main_refresh"
+                android:id="@+id/grid_refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/main_recycler"
+                    android:id="@+id/grid_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:clipToPadding="false"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item_image"
-                    tools:visibility="gone" />
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="2"
+                    tools:listitem="@layout/item_grid" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
             <LinearLayout
                 android:id="@+id/error_layout"
@@ -46,8 +39,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
+                android:visibility="gone">
 
 
                 <TextView
@@ -56,19 +48,31 @@
                     android:layout_height="wrap_content"
                     android:text="@string/something_wrong" />
 
+                <Space
+                    android:layout_width="26dp"
+                    android:layout_height="8dp" />
+
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/something_wrong_desc" />
+
+                <Space
+                    android:layout_width="26dp"
+                    android:layout_height="48dp" />
+
+
                 <Button
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:clickable="false"
                     android:text="@string/refresh"
                     android:textColor="@color/black" />
 
             </LinearLayout>
-
         </FrameLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

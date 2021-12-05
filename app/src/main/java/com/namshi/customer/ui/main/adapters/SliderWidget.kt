@@ -1,13 +1,15 @@
 package com.namshi.customer.ui.main.adapters
 
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.namshi.customer.R
 import com.namshi.customer.base.BaseAdapter
-import com.namshi.customer.base.BaseFragment
 import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemSliderSubBinding
 import com.namshi.customer.model.Image
@@ -20,12 +22,12 @@ import com.namshi.customer.utils.load
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-class SliderWidget(private val fragment: BaseFragment, private val listener: ClickListener) :
+class SliderWidget(private val fragment: Fragment, private val listener: ClickListener) :
     BaseAdapter<SliderWidget.Holder>(fragment) {
 
     private val items: MutableList<Image> = mutableListOf()
-    private val handler
-        get() = fragment.handler
+
+    val handler = Handler(Looper.getMainLooper())
 
     private val autoScroll = object : Runnable {
         override fun run() {
@@ -37,7 +39,7 @@ class SliderWidget(private val fragment: BaseFragment, private val listener: Cli
 
             if (position == itemCount.minus(1)) rv?.smoothScrollToPosition(0)
             else rv?.smoothScrollToPosition(position.plus(1))
-            fragment.handler.postDelayed(this, AUT0_SCROLL_TIMER)
+            handler.postDelayed(this, AUT0_SCROLL_TIMER)
         }
     }
 
@@ -68,6 +70,7 @@ class SliderWidget(private val fragment: BaseFragment, private val listener: Cli
 
     override fun onPause() {
         super.onPause()
+        handler.removeCallbacksAndMessages(null)
         rv?.removeOnScrollListener(autoScrollEnabler)
     }
 

@@ -2,6 +2,7 @@ package com.namshi.customer.base
 
 import android.view.View
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) :
+abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: Fragment? = null) :
     RecyclerView.Adapter<T>(), LifecycleObserver {
 
     protected var rv: RecyclerView? = null
