@@ -11,8 +11,10 @@
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/fragment_grid_product.xml" value="0.2390625" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.2390625" />
+        <entry key="app/src/main/res/layout/fragment_view_product.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/item_carousel.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/item_carousel_sub.xml" value="0.49583333333333335" />
+        <entry key="app/src/main/res/layout/item_grid.xml" value="0.49583333333333335" />
         <entry key="app/src/main/res/layout/item_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_image.xml" value="0.375" />
         <entry key="app/src/main/res/layout/item_image_sub.xml" value="0.49583333333333335" />

@@ -8,7 +8,7 @@ import androidx.fragment.app.activityViewModels
 import com.namshi.customer.base.BaseFragment
 import com.namshi.customer.model.Image
 import com.namshi.customer.databinding.FragmentGridProductBinding
-import com.namshi.customer.utils.ActionListener
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.ui.main.MainViewModel
 import com.namshi.customer.network.response.ApiResponse
 import com.namshi.customer.network.response.CarouselContent
@@ -17,9 +17,11 @@ import com.namshi.customer.utils.ShowImage
 import com.namshi.customer.utils.showIf
 
 /**
- * Displays list of Products in 2 column grid
+ * Created by @mohamedebrahim96 on 21,November,2021
+ * ShopiniWorld, Inc
+ * ebrahimm131@gmail.com
  */
-class DetailsFragment : BaseFragment(), ActionListener {
+class DetailsFragment : BaseFragment(), ClickListener {
 
     companion object {
         fun newInstance(): DetailsFragment {
@@ -35,8 +37,6 @@ class DetailsFragment : BaseFragment(), ActionListener {
 
     private var _binding: FragmentGridProductBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     private val viewModel: MainViewModel by activityViewModels()

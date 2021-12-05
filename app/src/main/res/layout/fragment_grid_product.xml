@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:text="@string/refresh"
-                android:textColor="@color/black_variant" />
+                android:textColor="@color/black" />
 
         </LinearLayout>
     </FrameLayout>

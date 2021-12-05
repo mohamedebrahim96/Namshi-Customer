@@ -9,14 +9,14 @@ import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemCarouselSubBinding
 import com.namshi.customer.model.Image
 import com.namshi.customer.model.NamshiWidget
-import com.namshi.customer.utils.ActionListener
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.load
 
 /**
  * Adapter to display [NamshiWidget.Type]
  * */
-class CarouselWidget(private val listener: ActionListener) :
+class CarouselWidget(private val listener: ClickListener) :
     BaseAdapter<CarouselWidget.Holder>() {
     private val items: MutableList<Image> = mutableListOf()
 

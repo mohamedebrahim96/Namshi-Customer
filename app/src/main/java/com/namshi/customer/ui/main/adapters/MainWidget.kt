@@ -13,14 +13,14 @@ import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.databinding.ItemCarouselBinding
 import com.namshi.customer.databinding.ItemImageBinding
 import com.namshi.customer.databinding.ItemSliderBinding
-import com.namshi.customer.utils.ActionListener
+import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.clearAndAddAll
 import com.namshi.customer.utils.gone
 
 /**
  * Main Screen Adapter that identifies the type of [NamshiWidget] and assigns the appropriate view and adapters based on respective [NamshiWidget.Type]
  * */
-class MainWidget(private val fragment: BaseFragment, private val listener: ActionListener) : BaseAdapter<MainWidget.Holder>(fragment) {
+class MainWidget(private val fragment: BaseFragment, private val listener: ClickListener) : BaseAdapter<MainWidget.Holder>(fragment) {
 
     private val items: MutableList<NamshiWidget> = mutableListOf()
 

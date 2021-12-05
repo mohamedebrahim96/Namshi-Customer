@@ -14,36 +14,4 @@ import timber.log.Timber
  */
 
 @HiltAndroidApp
-class NamshiApp : Application(){
-    companion object {
-
-        @get:Synchronized
-        lateinit var instance: NamshiApp
-            private set
-    }
-
-
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-
-
-        initRxErrorHandler()
-    }
-
-    private fun initRxErrorHandler() {
-        //to avoid crash when undelivered exception occurs in rxjava
-        RxJavaPlugins.setErrorHandler { e ->
-            if (e is UndeliverableException) {
-                // Merely log undeliverable exceptions
-                Timber.e(e)
-            } else {
-                // Forward all others to current thread's uncaught exception handler
-                Thread.currentThread().also { thread ->
-                    thread.uncaughtExceptionHandler?.uncaughtException(thread, e)
-                }
-            }
-        }
-    }
-
-}
+class NamshiApp : Application()

@@ -37,9 +37,6 @@
                 android:name="com.namshi.customer.initializer.TimberInitializer"
                 android:value="androidx.startup" />
         </provider>
-
-        <activity android:name=".ui.details.DetailActivity" />
-
     </application>
 
 </manifest>
