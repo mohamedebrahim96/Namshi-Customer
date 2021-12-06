@@ -1,7 +1,6 @@
 package com.namshi.customer.model
 
 import com.namshi.customer.utils.dpToPx
-import kotlinx.serialization.Serializable
 
 
 /**
@@ -9,7 +8,6 @@ import kotlinx.serialization.Serializable
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-@Serializable
 data class NamshiWidget(
     val type: Type = Type.unknown,
     val cols: Int = -1,
@@ -23,7 +21,6 @@ data class NamshiWidget(
     val heightPx: Int
         get() = height.dpToPx.toInt()
 
-    @Serializable
     enum class Type : ViewType {
         image {
             override val asInt: Int get() = 1

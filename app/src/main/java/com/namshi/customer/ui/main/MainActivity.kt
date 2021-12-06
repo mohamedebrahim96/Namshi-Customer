@@ -22,7 +22,7 @@ class MainActivity : BindingActivity<ActivityMainBinding>(R.layout.activity_main
     }
 
     private fun initViews() {
-        addFragment(this, MainFragment.newInstance(), replace = true, addToBackStack = false)
+        addFragment(this, MainFragment(), replace = true, addToBackStack = false)
     }
 
 }

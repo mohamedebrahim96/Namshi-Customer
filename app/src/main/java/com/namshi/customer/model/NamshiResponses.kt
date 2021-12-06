@@ -14,14 +14,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class NamshiResponses(
-    @field:Json(name = "content") val content: List<Content>
+    @field:Json(name = "content") var content: List<Content> = listOf()
 ) : Parcelable {
     @Parcelize
     @JsonClass(generateAdapter = true)
     data class Content(
-        @field:Json(name = "type") var type: Type,
+        @field:Json(name = "type") var type: NamshiWidget.Type,
         @field:Json(name = "cols") val cols: Int = -1,
-        @field:Json(name = "images") var images: List<Images>?,
+        @field:Json(name = "images") var images: MutableList<Image> = mutableListOf(),
         @field:Json(name = "show") val show: Int = -1,
         @field:Json(name = "title") val title: String = "",
         @field:Json(name = "height") val height: Int = -1,
@@ -56,4 +56,12 @@ data class NamshiResponses(
             val asInt: Int
         }
     }
+
+    @Parcelize
+    @JsonClass(generateAdapter = true)
+    data class CarouselContent(
+        @field:Json(name = "images") val images: List<Image> = listOf(),
+        @field:Json(name = "url") var url: String = ""
+    ) : Parcelable
 }
+

@@ -5,7 +5,6 @@ import com.namshi.customer.utils.dpToPx
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 
 
 /**
@@ -13,7 +12,6 @@ import kotlinx.serialization.Serializable
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-@Serializable
 @Parcelize
 @JsonClass(generateAdapter = true)
 data class Image(
@@ -29,6 +27,5 @@ data class Image(
     val heightPx: Int
         get() = height.dpToPx.toInt()
 
-    @Serializable
     enum class Format { gif, image, unknown }
 }

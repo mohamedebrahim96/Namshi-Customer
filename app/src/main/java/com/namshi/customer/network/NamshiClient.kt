@@ -1,11 +1,7 @@
 package com.namshi.customer.network
 
 import com.namshi.customer.model.NamshiResponses
-import com.namshi.customer.model.NamshiWidget
-import com.namshi.customer.network.response.CarouselContent
-import com.namshi.customer.network.response.HomeContent
 import com.skydoves.sandwich.ApiResponse
-import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 
@@ -21,17 +17,10 @@ class NamshiClient @Inject constructor(
     suspend fun fetchHomeList(): ApiResponse<NamshiResponses> =
         namshiService.fetchHomeList()
 
-    suspend fun fetchProductList(): ApiResponse<CarouselContent> =
+    suspend fun fetchProductList(): ApiResponse<NamshiResponses.CarouselContent> =
         namshiService.fetchProductList()
 
-    open fun getMainScreenContent(): Observable<HomeContent> {
-        return NetworkClient.api().api1Content()
-    }
+    suspend fun getCarouselData(url: String): ApiResponse<NamshiResponses.CarouselContent> =
+        namshiService.getCarouselData(url)
 
-
-    open fun getCarouselData(widget: NamshiWidget): Observable<CarouselContent> {
-        return NetworkClient.api()
-            .getCarouselData(widget.url)
-            .map { it.url = widget.url;it }
-    }
 }

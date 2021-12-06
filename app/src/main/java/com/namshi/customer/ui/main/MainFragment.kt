@@ -10,13 +10,10 @@ import androidx.fragment.app.viewModels
 import com.namshi.customer.R
 import com.namshi.customer.databinding.FragmentMainBinding
 import com.namshi.customer.model.Image
-import com.namshi.customer.network.response.HomeContent
-import com.namshi.customer.network.response.NamshiResponse
 import com.namshi.customer.ui.details.DetailsFragment
 import com.namshi.customer.ui.main.adapters.MainWidget
 import com.namshi.customer.utils.ClickListener
 import com.namshi.customer.utils.SetupFragmentUtil.addFragment
-import com.namshi.customer.utils.showIf
 import com.skydoves.bindables.BindingFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,23 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : BindingFragment<FragmentMainBinding>(R.layout.fragment_main), ClickListener {
 
-    companion object {
-        fun newInstance(): MainFragment {
-            val args = Bundle()
-            val fragment = MainFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
 
     @get:VisibleForTesting
     internal val viewModel: MainViewModel by viewModels()
-
-    private var _binding: FragmentMainBinding? = null
-
-
-    private lateinit var adapter: MainWidget
+    private lateinit var mainWidgetAdapter: MainWidget
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,35 +36,13 @@ class MainFragment : BindingFragment<FragmentMainBinding>(R.layout.fragment_main
         savedInstanceState: Bundle?
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        return binding {}.root
+        mainWidgetAdapter = MainWidget(this, this)
+        return binding {
+            adapter = mainWidgetAdapter
+            vm = viewModel
+        }.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        adapter = MainWidget(this, this)
-        binding.mainRecycler.adapter = adapter
-        binding.mainRefresh.setOnRefreshListener { viewModel.refreshMainScreen() }
-        binding.errorLayout.setOnClickListener { viewModel.refreshMainScreen() }
-        viewModel.homeContentLiveData.observe(viewLifecycleOwner, ::setData)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun setData(response: NamshiResponse<HomeContent>) {
-        val data = response.data
-
-        binding.mainRefresh.isRefreshing = response.isLoading
-        binding.errorLayout.showIf(response.exception != null && data == null)
-
-        if (data != null)
-            adapter.setData(data.content)
-        else
-            adapter.setData(listOf())
-    }
 
     override fun onItemClick(image: Image) {
         addFragment(

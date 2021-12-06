@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.namshi.customer.R
-import com.namshi.customer.base.BaseAdapter
 import com.namshi.customer.databinding.ItemCarouselBinding
 import com.namshi.customer.databinding.ItemImageBinding
 import com.namshi.customer.databinding.ItemSliderBinding
@@ -34,9 +33,10 @@ class MainWidget(private val fragment: Fragment, private val listener: ClickList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val holder = when (viewType) {
-            NamshiWidget.Type.image.asInt -> Holder(
-                LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
-            )
+            NamshiWidget.Type.image.asInt ->
+                Holder(
+                    LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
+                )
             NamshiWidget.Type.slider.asInt -> Holder(
                 LayoutInflater.from(parent.context).inflate(R.layout.item_slider, parent, false)
             )
@@ -78,11 +78,9 @@ class MainWidget(private val fragment: Fragment, private val listener: ClickList
             }
             NamshiWidget.Type.carousel.asInt -> {
                 ItemCarouselBinding.bind(holder.itemView).apply {
-
                     root.layoutParams.apply {
                         height = widget.heightPx
                     }
-
                     if (widget.images.isEmpty()) {
                         carouselLoading.show()
                     } else {

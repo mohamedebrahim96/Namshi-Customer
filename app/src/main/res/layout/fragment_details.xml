@@ -38,7 +38,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/appBarLayout"
                 app:spanCount="2"
-                app:submitList="@{vm.productList2}"
+                app:submitList="@{vm.productList}"
                 app:toast="@{vm.toastMessage}"
                 tools:itemCount="10"
                 tools:listitem="@layout/item_grid"
