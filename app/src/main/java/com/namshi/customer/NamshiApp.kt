@@ -2,9 +2,6 @@ package com.namshi.customer
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import io.reactivex.rxjava3.exceptions.UndeliverableException
-import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import timber.log.Timber
 
 
 /**

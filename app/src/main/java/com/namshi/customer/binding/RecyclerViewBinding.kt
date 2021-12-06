@@ -2,6 +2,8 @@ package com.namshi.customer.binding
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.namshi.customer.model.NamshiWidget
+import com.namshi.customer.ui.main.adapters.MainWidget
 import com.skydoves.bindables.BindingListAdapter
 import com.skydoves.whatif.whatIfNotNullAs
 
@@ -26,6 +28,14 @@ object RecyclerViewBinding {
     fun bindSubmitList(view: RecyclerView, itemList: List<Any>?) {
         view.adapter.whatIfNotNullAs<BindingListAdapter<Any, *>> { adapter ->
             adapter.submitList(itemList)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("submitHomeList")
+    fun bindsubmitHomeList(view: RecyclerView, itemList: List<NamshiWidget>) {
+        view.adapter.whatIfNotNullAs<MainWidget> { adapter ->
+            adapter.setData(itemList)
         }
     }
 

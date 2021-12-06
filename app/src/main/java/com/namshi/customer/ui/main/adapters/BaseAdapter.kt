@@ -1,4 +1,4 @@
-package com.namshi.customer.base
+package com.namshi.customer.ui.main.adapters
 
 import android.view.View
 import androidx.core.view.children
@@ -17,7 +17,6 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: F
 
     protected var rv: RecyclerView? = null
 
-    companion object;
 
 
     init {

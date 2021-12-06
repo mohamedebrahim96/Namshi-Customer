@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.namshi.customer.R
-import com.namshi.customer.base.BaseAdapter
-import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemCarouselSubBinding
 import com.namshi.customer.model.Image
 import com.namshi.customer.utils.ClickListener

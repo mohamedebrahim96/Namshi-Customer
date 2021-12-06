@@ -43,7 +43,7 @@ class DetailViewModel @Inject constructor(
     }
 
     @get:Bindable
-    val productList2: List<Image> by productListFlow.asBindingProperty(viewModelScope, emptyList())
+    val productList: List<Image> by productListFlow.asBindingProperty(viewModelScope, emptyList())
 
     init {
         Timber.d("init MainViewModel")

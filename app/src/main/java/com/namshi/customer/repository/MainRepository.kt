@@ -1,15 +1,13 @@
 package com.namshi.customer.repository
 
 import androidx.annotation.WorkerThread
+import com.namshi.customer.model.Image
 import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.network.NamshiClient
-import com.namshi.customer.network.response.HomeContent
-import com.namshi.customer.utils.clearAndAddAll
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
 import com.skydoves.sandwich.suspendOnSuccess
-import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -36,7 +34,34 @@ class MainRepository @Inject constructor(
     ) = flow {
         val response = namshiClient.fetchHomeList()
         response.suspendOnSuccess {
-            emit(data.content)
+            emit(data.content.map {
+                if (it.type == NamshiWidget.Type.carousel) {
+                    val response = namshiClient.getCarouselData(it.url)
+                    var carouselList = mutableListOf<Image>()
+                    response.suspendOnSuccess {
+                        carouselList = data.images.toMutableList()
+                    }
+                    return@map NamshiWidget(
+                        type = it.type,
+                        cols = it.cols,
+                        show = it.show,
+                        images = carouselList,
+                        title = it.title,
+                        height = it.height,
+                        url = it.url
+                    )
+                } else {
+                    return@map NamshiWidget(
+                        type = it.type,
+                        cols = it.cols,
+                        show = it.show,
+                        images = it.images,
+                        title = it.title,
+                        height = it.height,
+                        url = it.url
+                    )
+                }
+            })
         }
             .onError {
                 onError(message())
@@ -45,29 +70,4 @@ class MainRepository @Inject constructor(
 
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
 
-
-    private var homeContent: HomeContent = HomeContent()
-
-    fun getMainScreenContent(): Observable<HomeContent> {
-        return Observable.create { emitter ->
-            namshiClient.getMainScreenContent()
-                .map {
-                    homeContent = it
-                    if (emitter.isDisposed.not())
-                        emitter.onNext(it)
-                    it
-                }
-                .flatMap { Observable.fromIterable(it.content.filter { it2 -> it2.type == NamshiWidget.Type.carousel }) }
-                .flatMap { namshiClient.getCarouselData(it) }
-                .map { widget ->
-                    val data = homeContent.content.find { it.url == widget.url }
-                    data?.images?.clearAndAddAll(widget.images)
-                    if (emitter.isDisposed.not())
-                        emitter.onNext(homeContent)
-                }
-                .subscribe({
-                    if (emitter.isDisposed.not()) emitter.onComplete()
-                }, emitter::onError)
-        }
-    }
 }

@@ -1,15 +1,15 @@
 package com.namshi.customer.ui.main
 
-import androidx.lifecycle.MutableLiveData
-import com.namshi.customer.network.response.HomeContent
-import com.namshi.customer.network.response.NamshiResponse
+import androidx.databinding.Bindable
+import androidx.lifecycle.viewModelScope
+import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.repository.MainRepository
-import com.namshi.customer.utils.plusAssign
 import com.skydoves.bindables.BindingViewModel
+import com.skydoves.bindables.asBindingProperty
+import com.skydoves.bindables.bindingProperty
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,42 +24,31 @@ class MainViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : BindingViewModel() {
 
-    private val homeContent: NamshiResponse<HomeContent> = NamshiResponse()
-    val homeContentLiveData: MutableLiveData<NamshiResponse<HomeContent>> =
-        MutableLiveData(NamshiResponse())
+    @get:Bindable
+    var isLoading: Boolean by bindingProperty(false)
+        private set
 
-    private val subscriptions = CompositeDisposable()
+    @get:Bindable
+    var toastMessage: String? by bindingProperty(null)
+        private set
+
+    private val homeFetchingIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    val homeListFlow = homeFetchingIndex.flatMapLatest {
+        mainRepository.fetchHomeList(
+            onStart = { isLoading = true },
+            onComplete = { isLoading = false },
+            onError = { toastMessage = it }
+        )
+    }
+
+    @get:Bindable
+    val homeContentLiveData: List<NamshiWidget> by homeListFlow.asBindingProperty(
+        viewModelScope,
+        emptyList()
+    )
 
     init {
-        fetchInitialData()
-    }
-
-    fun refreshMainScreen() = fetchInitialData()
-
-    private fun fetchInitialData() {
-        subscriptions += mainRepository.getMainScreenContent()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                homeContent.isLoading = true
-                homeContentLiveData.postValue(homeContent)
-            }
-            .subscribe({
-                homeContent.isLoading = false
-                homeContent.data = it
-                homeContent.exception = null
-                homeContentLiveData.postValue(homeContent)
-            }, {
-                Timber.e(it)
-                homeContent.isLoading = false
-                homeContent.exception = it as Exception?
-                homeContentLiveData.postValue(homeContent)
-            })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        subscriptions.dispose()
+        Timber.d("init MainViewModel")
     }
 
 }

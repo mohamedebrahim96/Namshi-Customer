@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlinx-serialization'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
@@ -112,8 +111,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
     testImplementation "com.squareup.okhttp3:mockwebserver:$versions.okhttpVersion"
-    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
     // moshi
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshiVersion"
@@ -142,17 +139,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$versions.androidxTestJunit"
     androidTestImplementation "com.android.support.test:runner:$versions.androidTestRunner"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espressoVersion"
-
-
-    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
-
-    //Serialization
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
-
-
-    //Rx
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
-    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
 
 }

@@ -9,8 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.namshi.customer.R
-import com.namshi.customer.base.BaseAdapter
-import com.namshi.customer.base.BaseViewHolder
 import com.namshi.customer.databinding.ItemSliderSubBinding
 import com.namshi.customer.model.Image
 import com.namshi.customer.utils.ClickListener
