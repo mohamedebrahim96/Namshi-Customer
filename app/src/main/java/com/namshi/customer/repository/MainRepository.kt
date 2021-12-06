@@ -3,9 +3,8 @@ package com.namshi.customer.repository
 import androidx.annotation.WorkerThread
 import com.namshi.customer.model.NamshiWidget
 import com.namshi.customer.network.NamshiClient
-import com.namshi.customer.network.NetworkClient
-import com.namshi.customer.network.response.CarouselContent
 import com.namshi.customer.network.response.HomeContent
+import com.namshi.customer.utils.clearAndAddAll
 import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onError
 import com.skydoves.sandwich.onException
@@ -45,4 +44,30 @@ class MainRepository @Inject constructor(
             .onException { onError(message) }
 
     }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+
+
+    private var homeContent: HomeContent = HomeContent()
+
+    fun getMainScreenContent(): Observable<HomeContent> {
+        return Observable.create { emitter ->
+            namshiClient.getMainScreenContent()
+                .map {
+                    homeContent = it
+                    if (emitter.isDisposed.not())
+                        emitter.onNext(it)
+                    it
+                }
+                .flatMap { Observable.fromIterable(it.content.filter { it2 -> it2.type == NamshiWidget.Type.carousel }) }
+                .flatMap { namshiClient.getCarouselData(it) }
+                .map { widget ->
+                    val data = homeContent.content.find { it.url == widget.url }
+                    data?.images?.clearAndAddAll(widget.images)
+                    if (emitter.isDisposed.not())
+                        emitter.onNext(homeContent)
+                }
+                .subscribe({
+                    if (emitter.isDisposed.not()) emitter.onComplete()
+                }, emitter::onError)
+        }
+    }
 }

@@ -1,6 +1,10 @@
 package com.namshi.customer.model
 
+import android.os.Parcelable
 import com.namshi.customer.utils.dpToPx
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 
@@ -10,12 +14,14 @@ import kotlinx.serialization.Serializable
  * ebrahimm131@gmail.com
  */
 @Serializable
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class Image(
-    val url: String = "",
-    val width: Int = 0,
-    val height: Int = 0,
-    val format: Format = Format.unknown
-) {
+    @field:Json(name = "url") val url: String = "",
+    @field:Json(name = "width") val width: Int = 0,
+    @field:Json(name = "height") val height: Int = 0,
+    @field:Json(name = "format") val format: Format = Format.unknown
+) : Parcelable {
 
     val widthPx: Int
         get() = width.dpToPx.toInt()

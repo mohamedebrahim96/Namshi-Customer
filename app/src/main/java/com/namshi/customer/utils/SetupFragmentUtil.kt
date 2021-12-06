@@ -1,35 +1,20 @@
-package com.namshi.customer.base
+package com.namshi.customer.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
-import com.bumptech.glide.Glide
 import com.namshi.customer.R
 
+object SetupFragmentUtil {
 
-/**
- * Created by @mohamedebrahim96 on 21,November,2021
- * ShopiniWorld, Inc
- * ebrahimm131@gmail.com
- */
-abstract class BaseActivity : AppCompatActivity() {
-
-    override fun onPause() {
-        super.onPause()
-        Glide.get(this).clearMemory()
-    }
-
-    /**
-     * Adds fragment on current stack
-     * There are bunch of options which are self explanatory
-     */
     fun addFragment(
+        activity: AppCompatActivity,
         fragment: Fragment,
         replace: Boolean = false, addToBackStack: Boolean = true,
         tag: String = fragment.javaClass.simpleName,
-        fragmentManager: FragmentManager = supportFragmentManager,
+        fragmentManager: FragmentManager = activity.supportFragmentManager,
         containerId: Int = R.id.container,
     ) {
 
@@ -74,5 +59,4 @@ abstract class BaseActivity : AppCompatActivity() {
             return null
         }
     }
-
 }

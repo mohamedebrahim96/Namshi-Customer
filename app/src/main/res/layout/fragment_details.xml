@@ -1,15 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.details.DetailsFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <FrameLayout
+        <variable
+            name="vm"
+            type="com.namshi.customer.ui.details.DetailViewModel" />
+
+        <variable
+            name="adapter"
+            type="com.namshi.customer.ui.details.adapters.DetailsAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.details.DetailsFragment">
+
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/grid_refresh"
@@ -17,14 +25,37 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/grid_recycler"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:fadeScrollbars="false"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                app:adapter="@{adapter}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout"
                 app:spanCount="2"
-                tools:listitem="@layout/item_grid" />
+                app:submitList="@{vm.productList2}"
+                app:toast="@{vm.toastMessage}"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_grid"
+                tools:visibility="visible" />
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:gone="@{!vm.loading &amp;&amp; adapter.submitted}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
         <LinearLayout
             android:id="@+id/error_layout"
@@ -67,6 +98,6 @@
                 android:textColor="@color/black" />
 
         </LinearLayout>
-    </FrameLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

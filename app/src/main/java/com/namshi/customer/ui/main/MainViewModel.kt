@@ -1,15 +1,17 @@
 package com.namshi.customer.ui.main
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.namshi.customer.network.response.NamshiResponse
-import com.namshi.customer.network.response.CarouselContent
 import com.namshi.customer.network.response.HomeContent
+import com.namshi.customer.network.response.NamshiResponse
+import com.namshi.customer.repository.MainRepository
 import com.namshi.customer.utils.plusAssign
+import com.skydoves.bindables.BindingViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import timber.log.Timber
+import javax.inject.Inject
 
 
 /**
@@ -17,16 +19,15 @@ import timber.log.Timber
  * ShopiniWorld, Inc
  * ebrahimm131@gmail.com
  */
-class MainViewModel : ViewModel() {
-
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val mainRepository: MainRepository
+) : BindingViewModel() {
 
     private val homeContent: NamshiResponse<HomeContent> = NamshiResponse()
-    val homeContentLiveData: MutableLiveData<NamshiResponse<HomeContent>> = MutableLiveData(NamshiResponse())
+    val homeContentLiveData: MutableLiveData<NamshiResponse<HomeContent>> =
+        MutableLiveData(NamshiResponse())
 
-    private val productList: NamshiResponse<CarouselContent> = NamshiResponse()
-    val productListLiveData: MutableLiveData<NamshiResponse<CarouselContent>> = MutableLiveData(NamshiResponse())
-
-    private val model: MainModel = MainModel()
     private val subscriptions = CompositeDisposable()
 
     init {
@@ -34,10 +35,9 @@ class MainViewModel : ViewModel() {
     }
 
     fun refreshMainScreen() = fetchInitialData()
-    fun refreshProductScreen() = getProductList()
 
     private fun fetchInitialData() {
-        subscriptions += model.getMainScreenContent()
+        subscriptions += mainRepository.getMainScreenContent()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -54,26 +54,6 @@ class MainViewModel : ViewModel() {
                 homeContent.isLoading = false
                 homeContent.exception = it as Exception?
                 homeContentLiveData.postValue(homeContent)
-            })
-    }
-
-    fun getProductList() {
-        subscriptions += model.getProductList()
-            .doOnSubscribe {
-                productList.isLoading = true
-                productListLiveData.postValue(productList)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                productList.isLoading = false
-                productList.data = it
-                productListLiveData.postValue(productList)
-            }, {
-                Timber.e(it)
-                productList.isLoading = false
-                productList.exception = it as Exception?
-                productListLiveData.postValue(productList)
             })
     }
 

@@ -1,7 +1,11 @@
 package com.namshi.customer.network.response
 
+import android.os.Parcelable
 import com.namshi.customer.model.Image
 import com.namshi.customer.model.NamshiWidget
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,6 +27,11 @@ data class HomeContent(val content: List<NamshiWidget> = listOf())
 
 /**
  * API 2, 3, 4 Response
-* */
+ * */
 @Serializable
-data class CarouselContent(val images: List<Image> = listOf(), var url: String = "")
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class CarouselContent(
+    @field:Json(name = "images") val images: List<Image> = listOf(),
+    @field:Json(name = "url") var url: String = ""
+) : Parcelable
