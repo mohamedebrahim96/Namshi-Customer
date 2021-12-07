@@ -16,25 +16,27 @@
 
 package com.namshi.customer.utils
 
+import com.namshi.customer.model.Image
 import com.namshi.customer.model.NamshiResponses
+import com.namshi.customer.model.NamshiWidget
 
 object MockUtil {
 
     fun mockContent() = NamshiResponses.Content(
-        type = NamshiResponses.Content.Type.image,
+        type = NamshiWidget.Type.image,
         cols = 1,
         images = mockContentImageList()
     )
 
-    fun mockContentList() = listOf(mockContent())
+    fun mockContentList() = mutableListOf(mockContent())
 
-    fun mockContentImage() = NamshiResponses.Content.Images(
+    fun mockContentImage() = Image(
         url = "https://a.namshicdn.com/cms/small/search/20180219/generic/module_01_en.jpg",
         width = 640,
         height = 152,
-        format = "image"
+        format = Image.Format.image
     )
 
-    fun mockContentImageList() = listOf(mockContentImage())
+    fun mockContentImageList() = mutableListOf(mockContentImage())
 
 }
